@@ -1,21 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
+import styles from './Navbar.module.css'; // Import CSS module
 
 function Navbar() {
   return (
-    <nav style={{ padding: '10px', backgroundColor: '#333', color: '#fff' }}>
-      <ul style={{ display: 'flex', listStyle: 'none', gap: '20px' }}>
+    <nav className={styles.navbar}>
+      <ul className={styles.navList}>
         <li>
-          <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>Home</Link>
+          <Link to="/" className={styles.navLink}>Home</Link>
         </li>
         <li>
-          <Link to="/Details" style={{ color: 'white', textDecoration: 'none' }}>Details</Link>
+          <Link to="/Details" className={styles.navLink}>Details</Link>
         </li>
         <li>
-          <Link to="/About" style={{ color: 'white', textDecoration: 'none' }}>About</Link>
+          <Link to="/About" className={styles.navLink}>About</Link>
         </li>
         <li>
-          <Link to="/FactsAndInfo" style={{ color: 'white', textDecoration: 'none' }}>Facts & Info</Link>
+          <Link to="/FactsAndInfo" className={styles.navLink}>Facts & Info</Link>
         </li>
       </ul>
     </nav>

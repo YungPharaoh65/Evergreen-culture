@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import styles from "./Dashboard.module.css"; 
 
+// Import as a module
+// so that the css reflects on different pages
+// to ensure that you have unique pages
 
 function Dashboard() {
   return (
-    <div>
-
+    <div  className={styles.dashboardContainer}> {/** to ensure that you have unique pages*/} 
 <Link to="/">
         <button>Go to Homepage</button>
       </Link>
