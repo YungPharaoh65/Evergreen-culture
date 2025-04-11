@@ -7,15 +7,16 @@ function Homepage() {
   return (
     
     <div className="body">
+
       <Navbar/>
+      
       <h1>Welcome to My Homepage</h1>
       
       {/* Link component for navigation */}
-      <Link to="/Dashboard">
-        <button>Go to Dashboard</button>
+      <Link to="/Choosepath">
+        <button>Get Started with us</button>
       </Link>
-
-
+ 
     </div>
   );
 }

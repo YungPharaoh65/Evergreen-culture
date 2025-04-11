@@ -1,0 +1,232 @@
+/* Container for each dashboard-like card */
+
+/*GARDENS*/
+.dashboardContainer1 {
+  width: 20rem;
+  height: 21rem;
+  background-color: transparent;
+  border: 2px solid transparent; /* Start with no visible border */
+  border-radius: 1rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* On hover, show the border color */
+.dashboardContainer1:hover {
+  border-color: #4CAF50; /* You can change this color to your preferred one */
+  transform: scale(1.02); /* Optional: slight scale for smooth effect */
+}
+
+ /* PLANTS */
+.dashboardContainer2 {
+  width: 20rem;
+  height: 21rem;
+  background-color: transparent;
+  border: 2px solid transparent; /* Add this so the border exists initially */
+  border-radius: 1rem;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* On hover, show the border color */
+.dashboardContainer2:hover {
+  border-color: #4CAF50; /* Change this to your theme color if needed */
+  transform: scale(1.02); /* Optional: slight lift effect */
+}
+
+  
+  /* SQUARE BOX DESIGN*//* SQUARE BOX DESIGN*//* SQUARE BOX DESIGN*/
+  .image {
+
+    width: 14rem;
+    height: 12rem;
+    background-color: rgb(3, 1, 0);
+    border-radius: 1rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    
+  }
+
+  .subtopics {  
+     width: fit-content;  
+     background-color: greenyellow;
+     color: rgb(102, 98, 98);
+     border: none;
+     margin-left: 1rem;
+     border-radius: .5rem;
+     padding: .3rem;
+  }
+
+  .subheadings {  
+    width: fit-content;  
+    background-color: greenyellow;
+    color: rgb(102, 98, 98);
+    border: none;
+    margin-left: .5rem;
+    margin-bottom: .5rem;
+    border-radius: 1rem;
+    padding: .6rem;
+
+ }
+  
+  .order {  
+    width: fit-content;  
+    background-color: rgb(189, 14, 212);
+    color: rgb(252, 239, 239);
+    border: none;
+    margin-left: 1rem;
+    border-radius: .5rem;
+    padding: .3rem;
+    cursor: pointer;
+ }
+
+  .subtopicsmove {  
+     margin-left: 1.3rem;
+     margin-top: .5rem;
+ }
+
+ .header {  
+  margin-left: 2.3rem;
+  margin-top: .5rem;
+
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+
+a {  
+  margin-left: 2.3rem; 
+  font-size: .8rem;
+}
+
+.price{  
+  margin-left: 14rem; 
+  margin-top: -4rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.location{  
+  margin-left: 10rem; 
+  margin-top: -4rem;
+  font-size: 2rem;
+  font-weight: 100;
+ }
+ 
+  /* SQUARE BOX DESIGN*//* SQUARE BOX DESIGN*//* SQUARE BOX DESIGN*/
+  
+
+
+  /* Add hover effect */
+  .dashboardContainer1:hover {
+    transform: scale(1.03); 
+  }
+
+  .dashboardContainer2:hover {
+    transform: scale(1.03); 
+  }
+  
+  /* First row of cards */
+  .centerbar2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  
+  /* Second row of cards */
+  .centerbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .plantboxWrapper {
+    border: 1px solid #ffffff; 
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin: 2rem auto;
+    width: fit-content;
+    background-color: transparent; /* Optional: darker background for contrast */
+     
+  }
+  
+  
+  /* CART PAGE*//* CART PAGE*//* CART PAGE*//* CART PAGE*/
+   /* CART PAGE*//* CART PAGE*//* CART PAGE*//* CART PAGE*/
+   .cartToggleBtn {
+    position: fixed;
+    top: 20px;     /* Move from bottom to top */
+    right: 30px;   /* Stays aligned to the right */
+    padding: 0.7rem 1.2rem;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+  }
+  
+  
+  .cart-content {
+    padding: 2rem;
+  }
+
+  .mainContainer {
+    width: 100px;        /* 90% of the viewport width */
+    max-width: 1800px;  /* Optional: limit to a maximum */
+    margin: 0 auto;     /* Center the container */
+    padding: 1rem;
+  }
+  
+  /* CartPage.module.css */
+.cartPageContainer {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+}
+
+.cartItems {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.checkoutSection {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.checkoutButton {
+  background-color: green;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Gardenplant.module.css */
+.containerGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+
+  /* CART PAGE*//* CART PAGE*//* CART PAGE*//* CART PAGE*/
+   /* CART PAGE*//* CART PAGE*//* CART PAGE*//* CART PAGE*/
+  

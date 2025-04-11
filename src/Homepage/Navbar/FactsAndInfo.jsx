@@ -1,16 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 function FactsAndInfo() {
   return (
-    <div>
-      <h1> FACTS AND INFO</h1>
+    <div> 
+      
+ <Navbar/>
+      <h1> DIY - Information and more</h1>
       
       {/* Link component for navigation */}
       <Link to="/Dashboard">
-        <button>Go to Dashboard</button>
-      </Link>
-
+        <button>facts and trivia</button>
+      </Link> 
 
     </div>
   );

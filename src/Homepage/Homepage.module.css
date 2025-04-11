@@ -1,2 +1,30 @@
-  /*HOMEPAGE CHANGES*/ 
-   
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+  margin-top: -4rem;
+}
+
+/* Buttons row layout */
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.container button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.closeButton {
+  position: absolute;
+  top: -5px;
+  left: -5rem;
+  margin: 100px; /* optional: adds space from edges */
+}

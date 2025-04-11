@@ -1,24 +1,25 @@
 /* General Navbar Styling */
 .navbar {
-  padding: 15px 20px;
-  background-color: #333;
+  padding: 35px 20px;
+  background-color: transparent;
   color: #fff;
   display: flex;
   justify-content: center;
+  border-radius: .5rem;
 }
 
 /* Navigation List */
 .navList {
   display: flex;
   list-style: none;
-  gap: 25px;
+  gap: 5rem;
   padding: 0;
   margin: 0;
 }
 
 /* Navigation Links */
 .navLink {
-  color: white;
+  color: rgb(26, 23, 23);
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
@@ -27,7 +28,19 @@
 
 /* Hover Effect */
 .navLink:hover {
-  color: #f4a261; /* Light Orange */
+  color: #58d432; /* Light Orange */
+}
+
+.toggleButton {
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  border-radius: 50%;
+  margin-left: 11rem;
+  margin-top: -1rem;
+  background-color: rgba(137, 139, 141, 0.699);
+  cursor: pointer;
+  position: fixed; /* Makes the toggle button fixed */
 }
 
 /* Responsive Design */
