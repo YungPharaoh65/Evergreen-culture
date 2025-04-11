@@ -20,7 +20,7 @@ function Dashboard() {
       <h1>Hi (User). Find your interests...</h1>
       <CartSidebar/>
       <Link to="/Feedback">
-          <button className={styles.feedback}>add your feedback here</button>
+          <button className={styles.feedback}>add your feedback here...</button>
         </Link>
         
       <div className={styles.Centerbar}>
