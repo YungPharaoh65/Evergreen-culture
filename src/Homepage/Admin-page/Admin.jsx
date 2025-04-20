@@ -88,7 +88,15 @@ function AdminPage() {
         return <Admingardenform />;
       default:
         return (
+
+          
           <div className={styles.HomeSection}>
+
+            
+      <Link to="/" className={styles.closeButton}>
+        <button>x</button>
+      </Link>
+      
             <h1>Admin Dashboard</h1>
 
             {/* Search Bar */}
@@ -215,9 +223,6 @@ function AdminPage() {
         {renderView()}
       </div>
 
-      <Link to="/" className={styles.closeButton}>
-        <button>x</button>
-      </Link>
     </div>
   );
 }
