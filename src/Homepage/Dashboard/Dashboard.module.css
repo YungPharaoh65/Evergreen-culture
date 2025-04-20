@@ -8,7 +8,7 @@
      /* YourStyles.module.css */
 .acceptButton {
   padding: 0.5rem 1rem;
-  background-color: green;
+  background-color: rgb(15, 148, 15);
   color: white;
   border: none;
   border-radius: 10px;
@@ -39,7 +39,7 @@
   background-color: rgb(114, 170, 54);
   color: white;
   border: none;
-  
+  cursor: pointer;
 }
 
 .exitButton {

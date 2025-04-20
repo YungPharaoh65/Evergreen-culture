@@ -1,33 +1,33 @@
-// src/pages/Login.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { auth } from '../Firebasedata/firebase';  // Import Firebase auth
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";  // Firebase sign-in methods
-import { googleProvider } from "../Firebasedata/firebase";  // Import GoogleAuthProvider
-import styles from "./Signup.module.css";  // Use the same styles as Signup
+import { auth } from '../Firebasedata/firebase';
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { googleProvider } from "../Firebasedata/firebase";
+import styles from "./Signup.module.css";
 
 const Login = () => {
-  const [email, setEmail] = useState("");   // State for email
-  const [password, setPassword] = useState("");   // State for password
-  const [error, setError] = useState("");  // Error state to store error message
-  const navigate = useNavigate();   // Navigation hook for routing
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  // Google Sign-In method (Sign in using Google)
+  // Google Sign-In
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);   // Google sign-in
+      const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
       if (user) {
-        navigate("/dashboard");  // Redirect to dashboard if user is authenticated
+        localStorage.setItem("userEmail", user.email); // ✅ Save email
+        navigate("/dashboard");
       }
     } catch (error) {
       setError("Google sign-in failed. Please try again.");
-      console.error(error.message);  // Handle errors if any
+      console.error(error.message);
     }
   };
 
-  // Email/Password Login method
+  // Email/Password Login
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -35,16 +35,16 @@ const Login = () => {
       const user = userCredential.user;
 
       if (user) {
-        navigate("/dashboard");  // Redirect to dashboard if login is successful
+        localStorage.setItem("userEmail", user.email); // ✅ Save email
+        navigate("/dashboard");
       }
     } catch (error) {
-      setError("Invalid email or password.");  // Display error message
+      setError("Invalid email or password.");
     }
   };
 
   return (
     <div className={styles.signupContainer}>
-      
       <Link to="/">
         <button className={styles.exitButton}>x</button>
       </Link>
@@ -52,31 +52,26 @@ const Login = () => {
       <form className={styles.signupForm} onSubmit={handleLogin}>
         <h2>Login</h2>
 
-        {/* Email Input */}
         <input
           type="email"
           placeholder="Email Address"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}   // Handle email input change
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        {/* Password Input */}
         <input
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}   // Handle password input change
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        {/* Error message */}
-        {error && <p className={styles.error}>{error}</p>}  {/* Error display */}
+        {error && <p className={styles.error}>{error}</p>}
 
-        {/* Login Button */}
         <button type="submit" className={styles.signupBtn}>Login</button>
 
-        {/* Google Sign-In Button */}
         <button
           type="button"
           className={styles.googleBtn}

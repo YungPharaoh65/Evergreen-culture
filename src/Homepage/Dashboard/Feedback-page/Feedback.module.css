@@ -1,0 +1,77 @@
+.positionContent{  
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-left: 12rem; 
+    height: 29rem;
+    width: 55rem;
+}
+
+.reviewBox{
+    width: 8rem;
+    height: 8rem; 
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1rem;
+
+     
+}
+
+.reviewContent{
+    width: 52rem;
+    height: 16rem;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-left: -10rem;
+    padding: 1rem;
+}
+
+.reviewText{
+    width: 20rem;
+    height: 11rem; 
+    background-color: transparent;
+    border: transparent;
+
+    margin-left: 9rem;
+    margin-top: -9.5rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: .8rem;
+}
+ 
+.bar{
+     width: 15rem;
+     height: .7rem; 
+     background-color: rgb(133, 34, 100); 
+     border-radius: 1rem;
+ }
+
+ .reviewParagraph{
+    border: transparent;
+    padding: .5rem; 
+    height: 5rem; 
+    margin-left: 5rem;
+    border-radius: 1rem;
+ }
+
+ .username{
+    margin-top: -.3rem;
+ }
+
+ .moveComment{
+    margin-top: -3.1rem;
+    margin-left: 12rem;
+ }
+ 
+ .alignbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;  
+    margin-top: -.5rem;
+    margin-left: -1rem;
+ }

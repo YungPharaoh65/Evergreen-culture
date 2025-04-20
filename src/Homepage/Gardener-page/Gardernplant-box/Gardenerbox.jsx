@@ -1,197 +1,111 @@
-import React from 'react';
-import styles from './Gardenplant.module.css';  
-import { Link } from "react-router-dom"; 
- 
+import React, { useEffect, useState } from 'react';
+import styles from './Gardenplant.module.css';
+import { Link } from "react-router-dom";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../../Firebasedata/firebase';
+
 function Gardenerbox() {
-  
+  const [gardeners, setGardeners] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState('All');
+
+  const filterOptions = ["All", "Landscaping", "Cultivating", "Other"];
+
+  useEffect(() => {
+    const fetchGardeners = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "gardeners"));
+        const data = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setGardeners(data);
+      } catch (error) {
+        console.error("Error fetching gardeners: ", error);
+      }
+    };
+
+    fetchGardeners();
+  }, []);
+
+  const filteredGardeners = selectedFilter === 'All'
+    ? gardeners
+    : gardeners.filter(gardener =>
+        gardener.filters?.includes(selectedFilter) || (selectedFilter === "Other" && !gardener.filters?.some(filter => ["Landscaping", "Cultivating"].includes(filter)))
+      );
+
   return (
-    <div>
-         
-   <div className={styles.plantboxWrapper}>
+    <div className={styles.plantboxWrapper}>
 
+      {/* FILTER BUTTONS */}
+      <div className={styles.subtopicsmove}>
+        {filterOptions.map((filter) => (
+          <button
+            key={filter}
+            className={`${styles.subheadings} ${selectedFilter === filter ? styles.activeFilter : ''}`}
+            onClick={() => setSelectedFilter(filter)}
+          >
+            {filter}
+          </button>
+        ))}
+        <br /><br />
+      </div>
 
- <div className={styles.subtopicsmove}> 
-                  <button className={styles.subheadings}>Gardener</button>
-         <button className={styles.subheadings}>landscaping</button> 
-         <button className={styles.subheadings}>cultivating</button>
-         <button className={styles.subheadings}>cleaning</button> 
-         
-         <br /> <br />
-</div>
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
+      {/* GARDENER PROFILES */}
+      <div className={styles.centerbar2}>
+        {filteredGardeners.length === 0 ? (
+          <p style={{ textAlign: "center", color: "gray" }}>No gardeners match the filter.</p>
+        ) : (
+          filteredGardeners.map((gardener) => {
+            // Get the image URL from localStorage
+            const gardenerImage = localStorage.getItem(gardener.id);
+            console.log(gardener.id, gardenerImage); // Check what image is fetched
 
-<div className={styles.centerbar2}> {/**Boxes of information */}
-      {/**Boxes of information */}
+            // Default to placeholder image if no image is found in localStorage
+            const imageUrl = gardenerImage ? gardenerImage : "https://via.placeholder.com/150";
 
-      {/**Boxes of information */}
-      <div className={styles.dashboardContainer1}>
-      
-      {/**IMAGE */}
-       <div className={styles.image}></div>
+            return (
+              <Link to={`/Gardendetails/${gardener.id}`} key={gardener.id}>
+                <div className={styles.dashboardContainer1}>
 
-{/**SUBTOPIC BUTTONS */}
-<div className={styles.subtopicsmove}>
-        <button className={styles.subtopics}>garden</button>
-<button className={styles.subtopics}>cutting</button>
-<button className={styles.subtopics}>cultivating</button>
-</div>
+                  {/* IMAGE PLACEHOLDER */}
+                  <div
+                    className={styles.image}
+                    style={{
+                      backgroundImage: `url(${imageUrl})`, // Set the image from localStorage or placeholder
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  ></div>
 
-<div className={styles.header} >Prince Mpho <br /> Msimango</div>
-<a href="">more info</a>
+                  {/* FILTER TAGS */}
+                  <div className={styles.subtopicsmove}>
+                    {gardener.filters?.map((filter, idx) => (
+                      <button key={idx} className={styles.subtopics}>
+                        {filter}
+                      </button>
+                    ))}
+                  </div>
 
-<div className={styles.location}>Pretoria</div> 
-</div>  
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
+                  {/* GARDENER NAME */}
+                  <div className={styles.header}>
+                    {gardener.fullName || "Unnamed Gardener"}
+                  </div>
 
+                  {/* MORE INFO */}
+                  <a href="#">more info</a>
 
+                  {/* LOCATION */}
+                  <div className={styles.location}>
+                    {gardener.preferredLocation || "Location not set"}
+                  </div>
 
-      {/**Boxes of information */}
-      <div className={styles.dashboardContainer1}>
-      
-      {/**IMAGE */}
-       <div className={styles.image}></div>
-
-{/**SUBTOPIC BUTTONS */}
-<div className={styles.subtopicsmove}>
-        <button className={styles.subtopics}>garden</button>
-<button className={styles.subtopics}>cutting</button>
-<button className={styles.subtopics}>cultivating</button>
-</div>
-
-<div className={styles.header} >Prince Mpho <br /> Msimango</div>
-<a href="">more info</a>
- 
-<div className={styles.location}>Pretoria</div> 
-</div>  
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-              {/**Boxes of information */}
-
-
-
-      {/**Boxes of information */}
-      <div className={styles.dashboardContainer1}>
-      
-      {/**IMAGE */}
-       <div className={styles.image}></div>
-
-{/**SUBTOPIC BUTTONS */}
-<div className={styles.subtopicsmove}>
-        <button className={styles.subtopics}>garden</button>
-<button className={styles.subtopics}>cutting</button>
-<button className={styles.subtopics}>cultivating</button>
-</div>
-
-<div className={styles.header} >Prince Mpho <br /> Msimango</div>
-<a href="">more info</a>
-
-<div className={styles.location}>Pretoria</div> 
-</div>  
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-
-      </div>{/**Boxes of information */}
-
-
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
- 
-
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-<div className={styles.centerbar2}>  {/**CENTERTED DIV */} 
-         {/**Boxes of information */}
-      {/**Boxes of information */}
-      <div className={styles.dashboardContainer1}>
-      
-      {/**IMAGE */}
-       <div className={styles.image}></div>
-
-{/**SUBTOPIC BUTTONS */}
-<div className={styles.subtopicsmove}>
-  
-        <button className={styles.subtopics}>garden</button>
-<button className={styles.subtopics}>cutting</button>
-<button className={styles.subtopics}>cultivating</button>
-</div>
-
-<div className={styles.header} >Prince Mpho <br /> Msimango</div>
-<a href="">more info</a>
-
-<div className={styles.location}>Pretoria</div> 
-</div>  
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-
-
-      {/**Boxes of information */}
-      <div className={styles.dashboardContainer1}>
-      
-      {/**IMAGE */}
-       <div className={styles.image}></div>
-
-{/**SUBTOPIC BUTTONS */}
-<div className={styles.subtopicsmove}>
-  
-        <button className={styles.subtopics}>garden</button>
-<button className={styles.subtopics}>cutting</button>
-<button className={styles.subtopics}>cultivating</button>
-</div>
-
-<div className={styles.header} >Prince Mpho <br /> Msimango</div>
-<a href="">more info</a>
-
-<div className={styles.location}>Pretoria</div> 
-</div>  
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-   
-      {/**Boxes of information */}
-      <div className={styles.dashboardContainer1}>
-      
-      {/**IMAGE */}
-       <div className={styles.image}></div>
-
-{/**SUBTOPIC BUTTONS */}
-<div className={styles.subtopicsmove}>
-        <button className={styles.subtopics}>garden</button>
-<button className={styles.subtopics}>cutting</button>
-<button className={styles.subtopics}>cultivating</button>
-</div>
-
-<div className={styles.header} >Prince Mpho <br /> Msimango</div>
-<a href="">more info</a>
-
-<div className={styles.location}>Pretoria</div> 
-</div>  
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-{/**Boxes of information */}{/**Boxes of information */}{/**Boxes of information */}
-  </div>{/**Boxes of information */}
-
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-{/********************************************************************* */}
-
-
-          </div>
-    
-       </div>
+                </div>
+              </Link>
+            );
+          })
+        )}
+      </div>
+    </div>
   );
 }
 

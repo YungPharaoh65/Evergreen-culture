@@ -17,6 +17,8 @@ button {
   color: white;
   border: none;
   width: 100px;
+
+  cursor: pointer;
 }
 
  h1{
@@ -28,8 +30,8 @@ button {
   border-radius: 10px;
   background-color: rgb(231, 53, 29);
   color: white;
-  border: none;
-  width: 100px;
+  border: none; 
+  padding: .6rem;
 }
 
 /*

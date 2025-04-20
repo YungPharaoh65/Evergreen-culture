@@ -1,0 +1,296 @@
+ /*{}{}
+ subtopicsmove - placement
+ subheadings - buttons
+ */ 
+
+.border, .border2{
+    width: 20rem;
+    height:20rem; 
+    background-color: rgb(86, 112, 112);
+    border-radius: 1rem;
+border: none;
+
+margin-top: 5rem; 
+}
+
+.body{
+    margin-left: 15rem;
+    
+}
+
+.cartbutton{
+    background-color: green;
+    border: none;
+    padding: .5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    color: white; 
+}
+
+.cartbutton:hover{
+    background-color: rgb(209, 206, 194); 
+    color: black;
+}
+.border2{
+    margin-left: 22rem;
+    margin-top: -20rem; 
+    width:33rem;  
+    height:19rem;
+    padding: 1rem;
+   
+    background-color: transparent;
+    border: transparent; 
+}
+
+ .positionContent{ 
+  width: 55rem;
+  height: 55rem; 
+  border-radius: 1rem;
+  padding: 1rem;
+  border: 1px solid black; 
+ }
+
+ .text{
+  margin-left: 1rem;
+ }
+
+ .centerboxes{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    margin-bottom: 2rem; 
+ }
+
+ .plantBtn{
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: gray;
+  margin-left: 1rem;
+ }
+
+
+.subtopicsmove {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-top: -1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .box1 { 
+    width: 15rem;
+    height: 10rem;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1rem;
+  }
+
+  .box2 { 
+    width: 30rem;
+    height:30rem;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+
+  .subheadings {
+    background-color: greenyellow;
+    color: rgb(102, 98, 98);
+    border: none;
+    border-radius: .5rem; 
+    cursor: pointer; 
+    height: 2rem;
+    width: fit-content;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .subheadings2 {
+    background-color: transparent;
+    color: rgb(7, 46, 18);
+    border: 1px solid rgb(61, 59, 59);
+    border-radius: .5rem; 
+    cursor: pointer; 
+    height: 2rem;
+    width: fit-content;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .subheadings22 {
+    background-color: rgb(60, 77, 60);
+    color:white;
+    border: none; 
+    cursor: pointer; 
+    height: 2rem;
+    width: fit-content;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .ratingheading {
+    background-color: transparent;
+    color: rgb(31, 29, 29);
+    border: none;
+    border-radius: .5rem; 
+    cursor: pointer; 
+    padding: .5rem;
+    height: 2rem;
+    width: fit-content;
+    margin-top: 1.3rem;
+    margin-left: 2rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  h3{
+    margin-top: 1.3rem;
+  }
+  
+  .paragraph{
+    font-size: .9rem;
+  }
+
+  .exitButton{
+    font-size: .9rem;
+  }
+
+  /*///////////////////////////////////////////////////////////////////////////
+  FEEDBACK CSS
+  */
+  /*///////////////////////////////////////////////////////////////////////////
+  FEEDBACK CSS
+  */
+  /*///////////////////////////////////////////////////////////////////////////
+  FEEDBACK CSS
+  */
+
+  .positionContent{  
+    margin-bottom: 1rem;
+    margin-top: .6rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-left: -1rem; 
+    margin-bottom: 3rem;
+    height: 59rem;
+    width: 55rem;
+}
+
+.positionContent2{  
+  margin-bottom: 1rem;
+  margin-top: -1.4rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-left: -1rem; 
+  margin-bottom: 3rem;
+  height: 29rem;
+  width: 55rem;
+}
+
+.reviewBox{
+    width: 8rem;
+    height: 8rem; 
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1rem;
+
+     
+}
+
+.reviewContent{
+    width: 52rem;
+    height: 16rem;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-left: -10rem;
+    padding: 1rem;
+}
+
+.reviewText{
+    width: 20rem;
+    height: 11rem; 
+    background-color: transparent;
+    border: transparent;
+
+    margin-left: 9rem;
+    margin-top: -9.5rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: .8rem;
+}
+ 
+.bar{
+     width: 15rem;
+     height: .7rem; 
+     background-color: rgb(133, 34, 100); 
+     border-radius: 1rem;
+ }
+
+ .reviewParagraph{
+    border: transparent;
+    padding: .5rem; 
+    height: 5rem; 
+    margin-left: 5rem;
+    border-radius: 1rem;
+ }
+
+ .username{
+    margin-top: -.3rem;
+ }
+
+ .moveComment{
+    margin-top: -3.1rem;
+    margin-left: 12rem;
+ }
+ 
+ .alignbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;  
+    margin-top: -.5rem;
+    margin-left: -1rem;
+ }
+
+ /*///////////////////////////////////////////////////////////////////////////
+  FEEDBACK CSS
+  */
+
+  .dropdownWrapper {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.6s ease, opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .dropdownWrapper.open {
+    max-height: 1500px; /* or large enough for your content */
+    opacity: 1;
+    transform: translateY(-10);
+
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
+  }
+  
+  .dropdownWrapper.closed {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px); 
+  }
+  
+  .reviewDropdown {
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
+  }
+  
+  .reviewDropdown2 {
+    transition: all 0.3s ease-in-out; 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  

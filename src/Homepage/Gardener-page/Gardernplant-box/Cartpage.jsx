@@ -5,7 +5,7 @@ import "react-modern-drawer/dist/index.css";
 import styles from './Gardenplant.module.css';  
 import { gardenItems } from '../Gardernplant-box/data/items';
 
-const CartSidebar = () => {
+const CartSidebar = () => {``
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = () => setIsOpen((prev) => !prev);
 
@@ -26,44 +26,43 @@ const CartSidebar = () => {
         className={styles.cartDrawer}
       >
         <div className={styles.cartContent}>
-          <h2>Your Cart</h2>
+          <h2>my orders </h2>
 
-          {/* Planting Side */}
-          <div>
-            <h3>🌱 Planting Side</h3>
-            {plantingItems.length > 0 ? (
-              <ul>
-                {plantingItems.map((item) => (
-                  <li key={item.id} style={{ marginBottom: "1rem" }}>
-                    <strong>{item.title}</strong>
-                    <p>{item.price ? `Price: ${item.price}` : "No price available"}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No planting items.</p>
-            )}
-          </div>
+{/**small border info */}{/**small border info */}{/**small border info */}
+          <div className={styles.borderbox}>
+            
 
-          {/* Gardener Side */}
-          <div style={{ marginTop: '2rem' }}>
-            <h3>👨‍🌾 Gardener Side</h3>
-            {gardenerItems.length > 0 ? (
-              <ul>
-                {gardenerItems.map((item) => (
-                  <li key={item.id} style={{ marginBottom: "1rem" }}>
-                    <strong>{item.title}</strong>
-                    <p>{item.price ? `Price: ${item.price}` : "No price available"}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No gardener items.</p>
-            )}
-          </div>
+             <div className={styles.smallborder}>
+              <p>List:</p>
+              <p>List:</p>
+              <p>List:</p>
+              </div>
 
-          <button onClick={toggleDrawer}>x</button>
-        </div>
+            <br /> 
+            <button className={styles.cartbtn}>quantity/s: 10</button>
+            <button className={styles.cartbtn}>order on</button>
+            </div>
+{/**small border info */}{/**small border info */}{/**small border info */}
+
+<br /><br />
+
+{/**small border info */}{/**small border info */}{/**small border info */}
+<div className={styles.borderbox}>
+
+              <div className={styles.smallborder}>
+              <p>Name: (request/date/time wanted)</p>
+                </div>
+              
+            <br /> 
+             <button className={styles.cartbtn}>Amount: R900</button>
+             <button className={styles.cartbtn}>Hire proff.</button>
+            
+             </div>
+{/**small border info */}{/**small border info */}{/**small border info */}
+
+<button className={styles.cartbtn2}>take orders</button>
+<br />
+            </div>
       </Drawer>
     </div>
   );

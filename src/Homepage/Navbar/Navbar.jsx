@@ -15,11 +15,12 @@ function Navbar() {
           <Link to="/About" className={styles.navLink}>About Us</Link>
         </li>
         <li>
-          <Link to="/FactsAndInfo" className={styles.navLink}>Facts & Info (Conttact Us)</Link>
-        </li> 
+          <Link to="/FactsAndInfo" className={styles.navLink}>Facts & Info </Link>
+        </li>  
         <li> 
          <Link to="/Signup"> <button className={styles.toggleButton}></button></Link>
         </li>
+        
       </ul>
     </nav>
 
