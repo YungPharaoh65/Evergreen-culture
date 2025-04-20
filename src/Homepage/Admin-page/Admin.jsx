@@ -223,6 +223,7 @@ function AdminPage() {
         {renderView()}
       </div>
 
+<br /><br />
     </div>
   );
 }
