@@ -180,7 +180,7 @@ margin-top: 5rem;
 .positionContent2{  
   margin-bottom: 1rem;
   margin-top: -1.4rem;
-  border: 1px solid black;
+  border: transparent;
   border-radius: 1rem;
   padding: 2rem;
   margin-left: -1rem; 
@@ -194,10 +194,14 @@ margin-top: 5rem;
     height: 8rem; 
     background-color: transparent;
     border: 1px solid black;
-    border-radius: 1rem;
-
-     
+    border-radius: 1rem; 
 }
+
+.moveReviewBox{
+      margin-top: -5rem;
+      
+}
+
 
 .reviewContent{
     width: 52rem;
@@ -205,7 +209,8 @@ margin-top: 5rem;
     background-color: transparent;
     border: 1px solid black;
     border-radius: 1rem;
-    margin-top: 1rem;
+    margin-top: 10rem;
+    margin-bottom: 5rem;
     margin-left: -10rem;
     padding: 1rem;
 }
@@ -229,22 +234,16 @@ margin-top: 5rem;
      background-color: rgb(133, 34, 100); 
      border-radius: 1rem;
  }
-
- .reviewParagraph{
-    border: transparent;
-    padding: .5rem; 
-    height: 5rem; 
-    margin-left: 5rem;
-    border-radius: 1rem;
- }
+ 
 
  .username{
     margin-top: -.3rem;
  }
 
+ /*comments*/
  .moveComment{
-    margin-top: -3.1rem;
-    margin-left: 12rem;
+    margin-top: -1.5rem;
+     
  }
  
  .alignbar{
@@ -294,3 +293,123 @@ margin-top: 5rem;
     transform: translateY(-10px);
   }
   
+
+  .starContainer {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.star {
+  cursor: pointer;
+  color: #ccc;
+  margin: 0 5px;
+  transition: color 0.2s;
+}
+.star.active {
+  color: gold;
+}
+.feedbackBox {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-top: 10px;
+  resize: none;
+}
+.submitBtn {
+  margin-top: 10px;
+  padding: 8px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.starContainer {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+
+
+
+.star {
+  cursor: pointer;
+  color: #ccc;
+  margin: 0 5px;
+  transition: color 0.2s;
+}
+
+.star.active {
+  color: gold;
+}
+
+.textarea {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none;
+}
+
+.submitbtn {
+  background-color: green;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+
+.reviewContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem; 
+  border-radius: 0.75rem;
+  
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.reviewContent {
+  width: 52rem;
+  height: 16rem;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 1rem;
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  margin-left: -10rem;
+  padding: 1rem;
+  overflow-y: scroll;         /* Enable vertical scrolling */
+  scrollbar-width: none;      /* For Firefox */
+}
+
+.reviewContent::-webkit-scrollbar {
+  display: none;              /* For Chrome, Safari, Opera */
+}
+
+.reviewParagraph { 
+  padding: 1rem;
+  border-left: 4px solid #4CAF50; /* accent stripe */
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  margin-left: 8rem; 
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+
+.username {
+  font-weight: bold;
+  color: #333;
+  font-size: 1rem;
+}
+ 
+.reviewParagraph small {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.3rem;
+}

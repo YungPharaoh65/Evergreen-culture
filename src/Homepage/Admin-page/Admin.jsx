@@ -10,73 +10,86 @@ function AdminPage() {
   const [activeView, setActiveView] = useState("home");
   const [gardenerData, setGardenerData] = useState([]);
   const [gardenFormData, setGardenFormData] = useState([]);
+  const [feedbackData, setFeedbackData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // Fetch gardeners collection
   const fetchGardenerData = async () => {
     try {
       const gardenerRef = collection(db, "gardeners");
-      const gardenerSnapshot = await getDocs(gardenerRef);
-
-      if (!gardenerSnapshot.empty) {
-        const gardenerList = gardenerSnapshot.docs.map(doc => doc.data());
-        setGardenerData(gardenerList);
-      } else {
-        console.log("No gardener data found.");
-        setGardenerData([]);
-      }
+      const snapshot = await getDocs(gardenerRef);
+      setGardenerData(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
     } catch (error) {
       console.error("Error fetching gardener data:", error);
-      setGardenerData([]);
     }
   };
 
+  // Fetch gardenForms collection
   const fetchGardenFormData = async () => {
     try {
       const gardenFormRef = collection(db, "gardenForms");
-      const gardenFormSnapshot = await getDocs(gardenFormRef);
-
-      if (!gardenFormSnapshot.empty) {
-        const gardenFormList = gardenFormSnapshot.docs.map(doc => doc.data());
-        setGardenFormData(gardenFormList);
-      } else {
-        console.log("No garden form data found.");
-        setGardenFormData([]);
-      }
+      const snapshot = await getDocs(gardenFormRef);
+      setGardenFormData(snapshot.docs.map(doc => doc.data()));
     } catch (error) {
       console.error("Error fetching garden form data:", error);
-      setGardenFormData([]);
+    }
+  };
+
+  // Fetch feedbacks collection
+  const fetchFeedbackData = async () => {
+    try {
+      const feedbackRef = collection(db, "feedbacks");
+      const snapshot = await getDocs(feedbackRef);
+      setFeedbackData(snapshot.docs.map(doc => doc.data()));
+    } catch (error) {
+      console.error("Error fetching feedback data:", error);
     }
   };
 
   useEffect(() => {
     fetchGardenerData();
     fetchGardenFormData();
+    fetchFeedbackData();
   }, []);
 
   useEffect(() => {
-    if (gardenerData.length && gardenFormData.length) {
+    if (gardenerData.length && gardenFormData.length && feedbackData.length) {
       setLoading(false);
     }
-  }, [gardenerData, gardenFormData]);
+  }, [gardenerData, gardenFormData, feedbackData]);
 
-  // Search filter functions
-  const filterGardeners = (data) => {
-    return data.filter(item => {
-      const nameMatch = item.fullName && item.fullName.toLowerCase().includes(searchTerm.toLowerCase());
-      const idMatch = item.idNumber && item.idNumber.toString().toLowerCase().includes(searchTerm.toLowerCase());
-      return nameMatch || idMatch;
-    });
-  };
+  // Filter gardeners by fullName or idNumber
+  const filterGardeners = (data) =>
+    data.filter(item =>
+      (item.fullName && item.fullName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.idNumber && item.idNumber.toString().toLowerCase().includes(searchTerm.toLowerCase()))
+    );
 
-  const filterGardenForms = (data) => {
-    return data.filter(item => {
-      const nameMatch = item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase());
-      const categoryMatch =
-        item.category &&
-        Array.isArray(item.category) &&
-        item.category.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase()));
-      return nameMatch || categoryMatch;
+  // Filter garden forms by name or category
+  const filterGardenForms = (data) =>
+    data.filter(item =>
+      (item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.category && Array.isArray(item.category) &&
+        item.category.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase())))
+    );
+
+  // Filter feedbacks by gardener fullName, user, or comment
+  const filterFeedbacks = (data) => {
+    const term = searchTerm.toLowerCase();
+    return data.filter(feedback => {
+      const gardener = gardenerData.find(
+        g => g.id === feedback.gardenerId || g.idNumber === feedback.gardenerId
+      );
+      const gardenerName = gardener ? gardener.fullName.toLowerCase() : "";
+      const userName = feedback.user ? feedback.user.toLowerCase() : "";
+      const comment = feedback.comment ? feedback.comment.toLowerCase() : "";
+
+      return (
+        gardenerName.includes(term) ||
+        userName.includes(term) ||
+        comment.includes(term)
+      );
     });
   };
 
@@ -88,21 +101,13 @@ function AdminPage() {
         return <Admingardenform />;
       default:
         return (
-
-          
           <div className={styles.HomeSection}>
-
-            
-      <Link to="/" className={styles.closeButton}>
-        <button>x</button>
-      </Link>
-      
+            <Link to="/" className={styles.closeButton}><button>x</button></Link>
             <h1>Admin Dashboard</h1>
 
-            {/* Search Bar */}
             <input
               type="text"
-              placeholder="Search by name, ID, or category..."
+              placeholder="Search by name, ID, category, or comment..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className={styles.searchBar}
@@ -112,6 +117,7 @@ function AdminPage() {
               <p>Loading...</p>
             ) : (
               <>
+                {/* Gardener Details Table */}
                 <div className={styles.TableContainer}>
                   <h2>Gardener Details</h2>
                   <table>
@@ -140,14 +146,13 @@ function AdminPage() {
                           </tr>
                         ))
                       ) : (
-                        <tr>
-                          <td colSpan="7">No matching gardener data found.</td>
-                        </tr>
+                        <tr><td colSpan="7">No matching gardener data found.</td></tr>
                       )}
                     </tbody>
                   </table>
                 </div>
 
+                {/* Garden Form Table */}
                 <div className={styles.TableContainer}>
                   <h2>Garden Form Details</h2>
                   <table>
@@ -167,24 +172,54 @@ function AdminPage() {
                     </thead>
                     <tbody>
                       {filterGardenForms(gardenFormData).length > 0 ? (
-                        filterGardenForms(gardenFormData).map((gardenForm, index) => (
+                        filterGardenForms(gardenFormData).map((form, index) => (
                           <tr key={index}>
-                            <td>{gardenForm.name || "N/A"}</td>
-                            <td>{gardenForm.about || "No details available"}</td>
-                            <td>{gardenForm.weather || "N/A"}</td>
-                            <td>{gardenForm.kind ? gardenForm.kind.join(", ") : "N/A"}</td>
-                            <td>{gardenForm.location || "N/A"}</td>
-                            <td>{gardenForm.water || "N/A"}</td>
-                            <td>{gardenForm.placement || "N/A"}</td>
-                            <td>{gardenForm.nutrients || "N/A"}</td>
-                            <td>{gardenForm.howToPlant || "N/A"}</td>
-                            <td>{gardenForm.category ? gardenForm.category.join(", ") : "N/A"}</td>
+                            <td>{form.name || "N/A"}</td>
+                            <td>{form.about || "N/A"}</td>
+                            <td>{form.weather || "N/A"}</td>
+                            <td>{form.kind ? form.kind.join(", ") : "N/A"}</td>
+                            <td>{form.location || "N/A"}</td>
+                            <td>{form.water || "N/A"}</td>
+                            <td>{form.placement || "N/A"}</td>
+                            <td>{form.nutrients || "N/A"}</td>
+                            <td>{form.howToPlant || "N/A"}</td>
+                            <td>{form.category ? form.category.join(", ") : "N/A"}</td>
                           </tr>
                         ))
                       ) : (
-                        <tr>
-                          <td colSpan="10">No matching garden form data found.</td>
-                        </tr>
+                        <tr><td colSpan="10">No matching garden form data found.</td></tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Feedback Table */}
+                <div className={styles.TableContainer}>
+                  <h2>Feedback Comments</h2>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Gardener Name</th>
+                        <th>User Name</th>
+                        <th>Comment</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filterFeedbacks(feedbackData).length > 0 ? (
+                        filterFeedbacks(feedbackData).map((feedback, index) => {
+                          const gardener = gardenerData.find(
+                            g => g.id === feedback.gardenerId || g.idNumber === feedback.gardenerId
+                          );
+                          return (
+                            <tr key={index}>
+                              <td>{gardener ? gardener.fullName : "Unknown Gardener"}</td>
+                              <td>{feedback.user || "Anonymous"}</td>
+                              <td>{feedback.comment || "No comment provided"}</td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <tr><td colSpan="3">No feedback data found matching your search.</td></tr>
                       )}
                     </tbody>
                   </table>
@@ -199,31 +234,14 @@ function AdminPage() {
   return (
     <div className={styles.AdminContainer}>
       <div className={styles.ToggleBar}>
-        <button
-          className={activeView === "home" ? styles.Active : ""}
-          onClick={() => setActiveView("home")}
-        >
-          Dashboard
-        </button>
-        <button
-          className={activeView === "plants" ? styles.Active : ""}
-          onClick={() => setActiveView("plants")}
-        >
-          Plant Form
-        </button>
-        <button
-          className={activeView === "gardeners" ? styles.Active : ""}
-          onClick={() => setActiveView("gardeners")}
-        >
-          Gardener Form
-        </button>
+        <button className={activeView === "home" ? styles.Active : ""} onClick={() => setActiveView("home")}>Dashboard</button>
+        <button className={activeView === "plants" ? styles.Active : ""} onClick={() => setActiveView("plants")}>Plant Form</button>
+        <button className={activeView === "gardeners" ? styles.Active : ""} onClick={() => setActiveView("gardeners")}>Gardener Form</button>
       </div>
-
       <div className={styles.ViewSection}>
         {renderView()}
       </div>
-
-<br /><br />
+      <br /><br />
     </div>
   );
 }

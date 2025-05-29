@@ -20,6 +20,7 @@ import Gardendetails from "./Homepage/Dashboard/GardenPlantdetails/Gardendetails
 import Plantdetails from "./Homepage/Dashboard/GardenPlantdetails/Plantdetails";
 import Admingardenform from "./Forms/Admingardenform";
 import Adminplantform from "./Forms/Admingardenform";
+import UserDetails from "./Homepage/Dashboard/userAccount/userDetails"; 
   
 
 function App() {
@@ -35,9 +36,11 @@ function App() {
         <Route path="/Gardener" element={<Gardener />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/login" element={<Login />} /> 
+
         {/* Make sure this is pointing to the Login component */}
         <Route path="/Cartpage" element={<CartSidebar />} /> 
         {/* Make sure this is pointing to the Login component */}
+
         <Route path="/Choosepath" element={<Choosepath />} />
         <Route path="/Plantbox" element={<Plantbox />} />
         <Route path="/Gardenbox" element={<Gardenerbox />} />
@@ -60,6 +63,10 @@ function App() {
          {/* Routed to Plantdetails / Gardendetails page */}
          <Route path="/Gardendetails/:id" element={<Gardendetails />} />
          <Route path="/Plantdetails/:id" element={<Plantdetails />} />
+
+         {/* user details */}
+         <Route path="/UserDetails" element={<UserDetails />} />
+
 
       </Routes>
     </Router>

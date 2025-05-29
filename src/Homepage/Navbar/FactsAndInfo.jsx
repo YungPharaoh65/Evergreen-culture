@@ -13,11 +13,7 @@ function FactsAndInfo() {
       {/* Link component for navigation */}
       <Link to="/Dashboard">
         <button>Dashboard</button>
-      </Link> 
-
-      <Link to="/Plantdetails">
-        <button>Back to Plantdetails</button>
-      </Link> 
+      </Link>  
 
       <div className={styles.positionText}>
       <div className={styles.borderimg}> 

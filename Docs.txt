@@ -32,3 +32,42 @@ This site is a host for all three areas of business
  state their views about the company that they have around
  showing transparency between both parties. 
  
+
+
+ rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Garden Forms (open access — dev only)
+    match /gardenForms/{document=**} {
+      allow read, write: if request.auth != null; // Restricted to authenticated users
+    }
+
+    // Users collection — users can only access their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Gardeners collection
+    match /gardeners/{docId} {
+      // Public read access — for dev only; restrict in production
+      allow read: if request.auth != null; // Only authenticated users can read
+
+      // Only logged-in users can create entries
+      allow create: if request.auth != null;
+
+      // Admin-only update and delete access
+      allow update, delete: if request.auth != null && request.auth.uid == get(/databases/$(database)/documents/admins/firstAdmin).id; // Replace with dynamic admin UID
+    }
+
+    // Plants collection
+    match /plants/{docId} {
+      // Only logged-in users can create plant entries
+      allow create: if request.auth != null;
+
+      // Read access for everyone, update and delete restricted to admins
+      allow read: if true; // Open for everyone (can restrict in production)
+      allow update, delete: if request.auth != null && request.auth.token.isAdmin == true;
+    }
+  }
+}
