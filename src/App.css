@@ -1,1 +1,15 @@
- 
+ .homeButton {
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+  border: none; 
+  padding: 1rem;
+}
+
+.homeButton {
+  border-radius: 10px;
+  background-color: rgb(58, 161, 58);
+  color: white;
+  border: none; 
+  padding: 1rem;
+}

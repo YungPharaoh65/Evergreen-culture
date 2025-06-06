@@ -118,6 +118,8 @@ function Gardendetails() {
   };
 
   return (
+
+
     <div className={styles.body}>
       <CartSidebar />
       <Link to="/Dashboard">
@@ -178,8 +180,10 @@ function Gardendetails() {
               </button>
             ))}
         </div>
+        
 
         <br />
+
 
         <div className={styles.subtopicsmove}>
           <button className={styles.subheadings22}>
@@ -207,6 +211,7 @@ function Gardendetails() {
 
                 {feedbackList.length === 0 && <p>No reviews yet.</p>}
 
+
 <div className={styles.moveReviewBox}>
                 {feedbackList.map((review) => (
                   <div key={review.id} className={styles.reviewParagraph}>
@@ -227,12 +232,18 @@ function Gardendetails() {
                   
                 ))}
 </div>
+
               </div>
+              
             </div>
+
+            
 
 <br /><br /><br /><br /><br /><br /><br /> <br /><br />
 <br /><br /><br /><br /><br /><br /><br /> <br /><br />
+
             <div className={styles.reviewInputArea}>
+              
               <h3>Leave a Review</h3>
               <textarea
                 className={styles.textarea}
@@ -249,6 +260,7 @@ function Gardendetails() {
         </div>
       )}
     </div>
+
   );
 }
 

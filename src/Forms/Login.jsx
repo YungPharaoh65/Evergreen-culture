@@ -45,7 +45,7 @@ const Login = () => {
 
   return (
     <div className={styles.signupContainer}>
-      <Link to="/">
+      <Link to="/homepage">
         <button className={styles.exitButton}>x</button>
       </Link>
 

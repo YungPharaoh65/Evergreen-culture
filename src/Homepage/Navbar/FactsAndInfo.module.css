@@ -1,3 +1,4 @@
+/* ARTICLE SITE  */
 .positionText{
     display: flex;
     justify-content: center;
@@ -33,6 +34,7 @@ h2{
     background-color: transparent;
     border: transparent;
 }
+ 
 
 .borderButton{ 
     padding: .7rem;
@@ -43,4 +45,204 @@ margin-left: 1rem;
     margin-bottom: 1.5rem;
     position: relative;
     cursor: pointer;
+}
+/*ARTICLE SITE */
+
+
+
+/* second section *//* second section */
+/* second section */ 
+.secondSection {
+  background-color: transparent;
+  border: 1px solid rgb(148, 233, 99);
+  width: 99.3vw; /* full viewport width */
+  height: 40rem;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-bottom: 5rem;
+  margin-top: 1rem;
+}
+
+.thirdSection {
+  background-color: transparent;
+  border: 1px solid black;
+  width: 99.3vw; /* full viewport width */
+  height: 30rem;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-bottom: 5rem;
+  margin-top: 5rem;
+}
+ 
+.newHybrid {
+  text-align: center; 
+  margin-top: 2rem;
+}
+.centerimgbox2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+}
+
+.imgbox2 {
+  position: relative;
+  width: 20rem;
+  height: 20rem;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.imgbox2:hover {
+  transform: scale(1.03);
+}
+
+/* Overlay on hover */
+.imgbox2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Transparent by default */
+  transition: background-color 0.3s ease;
+  border-radius: 1rem;
+  z-index: 1;
+}
+
+.imgbox2:hover::before {
+  background-color: rgba(0, 0, 0, 0.3); /* Dark overlay on hover */
+}
+
+/* Text overlay */
+.imgbox2Text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 200;
+  font-size: 1.2rem; 
+  z-index: 2;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.imgbox2:hover .imgbox2Text {
+  opacity: 1;
+}
+
+
+
+.imgbox3 {
+  margin-top: 2rem;
+  width: 30rem;
+  height: 15rem;
+  background-color: transparent;
+  border: 1px solid gray;
+  border-radius: 1rem;
+}
+
+.imgbox3Text {
+  margin-left: 2rem;
+}
+
+.imgbox4 {
+  margin-top: 2rem;
+  width: 15rem;
+  height: 15rem;
+  background-color: black;
+  border: 1px solid gray;
+  border-radius: 1rem;
+}
+
+.moveimgbox4{
+  margin-right: 10rem;
+  margin-top: -34rem;
+  float: right;
+}
+
+
+
+.centerimgbox3 {
+  display: flex;
+   gap: 1rem;                /* customize this value for spacing */
+}
+
+.centerText {
+  text-align: center;
+}
+
+.customizeBtn {
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 1px solid gray; 
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+
+/* second section *//* second section */
+/* second section */ 
+
+
+
+.fourthSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  margin-top: -1rem; 
+}
+
+.text {
+  color: gray;
+  margin-top: -1rem;
+  cursor: pointer;
+}
+
+.logoheader {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.FontAwesomeIcon{
+  font-size: 1.5rem;
+  cursor: pointer; 
+}
+
+.homeButton {
+  border-radius: 10px;
+  background-color: rgb(58, 161, 58);
+  color: white;
+  border: none; 
+  padding: 1rem;
+}
+
+.homeButton:hover { 
+  border: none;
+  color: white;
+  background-color: rgb(0, 0, 0); 
+  
 }

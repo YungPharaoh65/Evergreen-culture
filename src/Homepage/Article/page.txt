@@ -1,0 +1,196 @@
+import React from "react"; 
+import { Link } from "react-router-dom";
+import styles from "./SearchArticle.module.css";
+
+function SearchArticle() {
+  return (
+    <div > 
+        <Link to="/FactsAndInfo">
+        <button>x</button>
+        </Link>  
+           
+{/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */} 
+<div className={styles.secondSection}>
+  <h1 className={styles.newHybrid}>Popular Articles</h1>
+
+ 
+<div className={styles.centerimgbox2}>
+
+<Link to="/article">
+<button>plantation</button> 
+</Link>
+<Link to="/article">
+<button>plantation</button> 
+</Link>
+<Link to="/article">
+<button>plantation</button> 
+</Link><Link to="/article">
+<button>plantation</button> 
+</Link>
+ 
+</div> 
+
+</div> 
+{/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
+ <h1>Recent Articles </h1>
+
+{/*ARTICLE DETAILS */}
+<div className={styles.centerimgbox2}>
+     <div className={styles.imgbox3}>
+        <div className={styles.imgbox3Text}>
+         <h3>planting trees and <br />
+         its benefits </h3>
+         
+         <p>learn about how we show information <br />
+         abd how they benefit us on the <br />
+         <b><u>article</u></b> site </p> 
+          <p>LEARN MORE 🌳</p> 
+        </div>
+     </div> 
+</div>
+{/*ARTICLE DETAILS */}{/*ARTICLE DETAILS */}
+<div className={styles.centerimgbox2}>
+     <div className={styles.imgbox3}>
+        <div className={styles.imgbox3Text}>
+         <h3>planting trees and <br />
+         its benefits </h3>
+         
+         <p>learn about how we show information <br />
+         abd how they benefit us on the <br />
+         <b><u>article</u></b> site </p> 
+          <p>LEARN MORE 🌳</p> 
+        </div>
+     </div> 
+</div>
+{/*ARTICLE DETAILS */}
+{/*ARTICLE DETAILS */}{/*ARTICLE DETAILS */}
+<div className={styles.centerimgbox2}>
+     <div className={styles.imgbox3}>
+        <div className={styles.imgbox3Text}>
+         <h3>planting trees and <br />
+         its benefits </h3>
+         
+         <p>learn about how we show information <br />
+         abd how they benefit us on the <br />
+         <b><u>article</u></b> site </p> 
+          <p>LEARN MORE 🌳</p> 
+        </div>
+     </div> 
+</div>
+{/*ARTICLE DETAILS */}
+
+
+
+ 
+ 
+    </div> 
+  );
+}
+
+export default SearchArticle;
+
+/* 
+ <p className={styles.centerText}>many types of plants to research and explore... <br />
+  whether you want to search for your own or want somebody to search for you. </p>
+ 
+*/
+
+
+
+
+
+
+
+
+
+
+
+import React from "react";
+import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
+import styles from "./FactsAndInfo.module.css"; 
+
+const images = [
+    "https://plus.unsplash.com/premium_photo-1673141390222-2bd01b623bf3?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1637531347055-4fa8aa80c111?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1538998073820-4dfa76300194?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // from RyLsRzy9jIA
+  ];
+
+
+function FactsAndInfo() {
+  return (
+    <div> 
+      
+ <Navbar/>
+    
+    <h1> DIY - Articles and Findings</h1>
+      
+      {/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
+
+<div className={styles.secondSection}>
+  <h1 className={styles.newHybrid}>New Hybrid</h1>
+
+  <p className={styles.centerText}>many types of plants to research and explore... <br />
+  whether you want to search for your own or want somebody to search for you. </p>
+ 
+<div className={styles.centerimgbox2}>
+
+<Link to="/article">
+<div className={styles.imgbox2}></div> 
+</Link>
+<Link to="/article">
+<div className={styles.imgbox2}></div> 
+</Link>
+<Link to="/article">
+<div className={styles.imgbox2}></div> 
+</Link>
+</div>
+
+</div>
+
+    
+{/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
+ <h1>DIY - planting, gardeneing, landscaping... <br />etc</h1>
+ 
+
+<div className={styles.centerimgbox2}> 
+<Link to="/plantDIY">
+<div className={styles.imgbox2}></div> 
+</Link> 
+<Link to="/plantDIY">
+<div className={styles.imgbox2}></div> 
+</Link> 
+<Link to="/plantDIY">
+<div className={styles.imgbox2}></div> 
+</Link> 
+</div>
+
+<br />
+
+<Link to="/SearchArticle">
+<div className={styles.centerimgbox2}>
+  <button>see more here</button>
+</div>
+
+</Link>
+
+<div className={styles.centerimgbox2}>
+<Link to="/plantDIY">
+<div className={styles.imgbox2}></div> 
+</Link> 
+<Link to="/plantDIY">
+<div className={styles.imgbox2}></div> 
+</Link> 
+<Link to="/plantDIY">
+<div className={styles.imgbox2}></div> 
+</Link> 
+
+
+</div>
+ <br /><br />
+    </div>
+  );
+}
+
+export default FactsAndInfo;
+

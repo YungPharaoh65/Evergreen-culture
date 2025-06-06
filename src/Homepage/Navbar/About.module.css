@@ -1,0 +1,45 @@
+/* Community.module.css */
+.topicCard {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.topicTitle {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.comment {
+  margin-left: 1rem;
+  font-size: 0.95rem;
+}
+
+.secondSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  margin-top: -1rem; 
+}
+
+.text {
+  color: gray;
+  margin-top: -1rem;
+}
+
+.logoheader {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.FontAwesomeIcon{
+  font-size: 1.5rem; 
+}

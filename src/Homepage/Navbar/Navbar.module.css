@@ -38,7 +38,8 @@
   border-radius: 50%;
   margin-left: 11rem;
   margin-top: -1rem;
-  background-color: rgba(137, 139, 141, 0.699);
+  border: 1px solid gray;
+  background-color: inherit;
   cursor: pointer;
   position: fixed; /* Makes the toggle button fixed */
 }
@@ -55,4 +56,8 @@
     flex-direction: column;
     gap: 15px;
   }
+}
+
+.FontAwesomeIcon{
+  font-size: 1.5rem; 
 }

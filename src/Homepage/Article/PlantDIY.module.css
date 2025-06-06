@@ -1,0 +1,100 @@
+/* THIRD SECTINON */
+
+
+.positionOne {
+  margin-left: 10rem;
+}
+
+.centerimgbox3 {
+  display: flex;
+   gap: 1rem;                /* customize this value for spacing */
+}
+
+.customizeBtn {
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 1px solid black; 
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.imgbox3 {
+  margin-top: 2rem;
+  width: 30rem;
+  height: 15rem;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+.imgbox3Text {
+  margin-left: 2rem;
+}
+
+.moveimgbox4{
+  margin-right: 10rem;
+  margin-top: -34rem;
+  float: right;
+}
+
+.centerimgbox2 {
+  display: flex;
+  justify-content: center; /* horizontally center the items */
+  gap: 1rem;               /* optional: space between items */
+}
+
+.moveimgbox4{
+  margin-right: 10rem;
+  margin-top: -34rem;
+  float: right;
+}
+
+.imgbox4 {
+  margin-top: 2rem;
+  width: 15rem;
+  height: 15rem;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 1rem;
+}
+
+.imgbox1 {
+  width: 23rem;
+  height: 23rem;
+  background-color: transparent;
+  border: 1px solid black;
+  float: right;
+  margin-top: -1rem; 
+  margin-right: 10rem;
+  border-radius: 2rem;
+}
+
+.moveimgbox4{
+  margin-right: 10rem;
+  margin-top: -34rem;
+  float: right;
+}
+
+.centerimgbox2 {
+  display: flex;
+  justify-content: center; /* horizontally center the items */
+  gap: 1rem;               /* optional: space between items */
+}
+
+
+/* THIRD SECTINON */
+
+.fourthSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 1rem;
+  
+}
+
+.exitBtn{
+  margin-bottom: -2.5rem;
+}

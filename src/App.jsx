@@ -21,14 +21,19 @@ import Plantdetails from "./Homepage/Dashboard/GardenPlantdetails/Plantdetails";
 import Admingardenform from "./Forms/Admingardenform";
 import Adminplantform from "./Forms/Admingardenform";
 import UserDetails from "./Homepage/Dashboard/userAccount/userDetails"; 
-  
-
+import ArticlePage from "./Homepage/Article/Articlepage"; 
+import PlantDIY from "./Homepage/Article/PlantDIY";
+import SearchArticle from "./Homepage/Article/SearchArticle"; 
+import Landingpage from "./Landing-page/Landingpage";
+ 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Public Routes you are only allowed to mention the route once*/}
-        <Route path="/" element={<Homepage />} />
+         <Route path="/" element={<Landingpage />} />
+       
+        <Route path="/homepage" element={<Homepage />} />
         <Route path="/Feedback" element={<Feedback />} />
         <Route path="/FactsAndInfo" element={<FactsAndInfo />} />
         <Route path="/Details" element={<Details />} />
@@ -67,6 +72,11 @@ function App() {
          {/* user details */}
          <Route path="/UserDetails" element={<UserDetails />} />
 
+        {/*article pages*/}
+         <Route path="/article" element={<ArticlePage />} />
+        <Route path="/plantDIY" element={<PlantDIY/>} />
+        <Route path="/SearchArticle" element={<SearchArticle/>} />
+        
 
       </Routes>
     </Router>
