@@ -5,8 +5,8 @@ import styles from "./Homepage.module.css";
 function Choosepath() {
   return (
     <div className={styles.container}>
-      <Link to="/" className={styles.closeButton}>
-        <button>x</button>
+      <Link to="/homepage" className={styles.closeButton}>
+        <button className={styles.closeLink}>x</button>
       </Link>
 
       <h1>Choose who to login as:</h1>

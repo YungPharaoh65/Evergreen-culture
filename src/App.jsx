@@ -25,11 +25,14 @@ import ArticlePage from "./Homepage/Article/Articlepage";
 import PlantDIY from "./Homepage/Article/PlantDIY";
 import SearchArticle from "./Homepage/Article/SearchArticle"; 
 import Landingpage from "./Landing-page/Landingpage";
+import Errorpage from "./Errors/Errorpage";
+import NetworkWrapper from "./Errors/NetworkWrapper";
  
 function App() {
   return (
     <Router>
-      <Routes>
+    {/* */}  <NetworkWrapper>
+       <Routes>
         {/* Public Routes you are only allowed to mention the route once*/}
          <Route path="/" element={<Landingpage />} />
        
@@ -76,9 +79,12 @@ function App() {
          <Route path="/article" element={<ArticlePage />} />
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/SearchArticle" element={<SearchArticle/>} />
+         {/* <Route path="/" element={<Errorpage />} /> */}
+        
         
 
       </Routes>
+      </NetworkWrapper>
     </Router>
   );
 }

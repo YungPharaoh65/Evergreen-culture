@@ -44,6 +44,30 @@
   position: fixed; /* Makes the toggle button fixed */
 }
 
+.linkWrapper {
+  display: inline-block; /* or block */
+}
+
+
+.darkOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(2, 2, 2, 0.6);
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .navbar {

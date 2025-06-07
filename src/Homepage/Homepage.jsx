@@ -1,10 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";  
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate  } from "react-router-dom";  
 import Navbar from "./Navbar/Navbar"; 
 import styles from "./Homepage.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 
 {/*ADD A CHATBOT GUIDE TO HELP NAVIGATE AS WELL */}
@@ -30,10 +32,30 @@ const images = [
 
 
 function Homepage() {
-  return (
-    
-    <div className={styles.body}>
 
+  const navigate = useNavigate();
+
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+    useEffect(() => {
+      const visited = localStorage.getItem("signupTooltipShown");
+      if (!visited) {
+        setShowTooltip(true);
+        localStorage.setItem("signupTooltipShown", "true");
+  
+        setTimeout(() => setShowTooltip(false), 4500);
+      }
+    }, []);
+  
+    
+    
+  
+  return ( 
+
+    <div className={styles.body}>
+      {/* Overlay when tooltip is visible */}
+            {showTooltip && <div className={styles.darkOverlay}></div>}
+       
       <Navbar/>
       
       {/**FIRST SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
@@ -47,11 +69,31 @@ function Homepage() {
       Join us to explore more</p>
        
       {/* Link component for navigation */}
-      <Link to="/Choosepath">
-        <button className={styles.homeButton}>Get Started with us</button>
-      </Link>
+
+<div className={styles.positionOne}>
+       <Tippy content="Click here to sign up!"
+              visible={showTooltip}
+              theme="dark"
+              placement="bottom"
+              className={styles.TippyBtn}>
+                
+          <button
+            className={styles.homeButton}
+            onClick={() => navigate('/Choosepath')}
+          >
+            Get Started with us
+          </button>
+        </Tippy>
+
+        </div>
+
       {/**FIRST SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
 
+ <li>
+            <button onClick={() => localStorage.removeItem("signupTooltipShown")}>
+              Reset Tooltip Storage
+            </button>
+          </li>
 <br /><br /><br />
       {/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
 

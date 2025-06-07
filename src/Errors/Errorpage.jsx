@@ -1,11 +1,9 @@
-import React from "react"; // Added useEffect to fetch email
-import { Link } from "react-router-dom";
+import React from "react"; // Added useEffect to fetch email 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faSeedling } from "@fortawesome/free-solid-svg-icons";
-import styles from "./Landingpage.module.css";
-
-function Landingpage() {
+import styles from "./Errorpage.module.css";
+ 
+function Errorpage() {
    
   return (
     
@@ -19,26 +17,30 @@ function Landingpage() {
   
   <div className={styles.secondSection}>
     <div className={styles.logoheader}>
-      Evergreen <FontAwesomeIcon icon={faSeedling} color="#25D366" className={styles.FontAwesomeIcon} />
+      
+     <img src="/demoimg.jpg" alt="My GIF" />
+
     </div>
   </div>
-
+  
   <div className={styles.secondSection}>
-    <p className={styles.text}>its more than just a website, its a digital geography of nature</p>
+    <p className={styles.text}>just found yourself on a <b>404 error</b> <br />dont worry man, just check your network or click on refresh </p>
   </div>
 
-  <div className={styles.secondSection}>
-    <Link to="/homepage">
-      <button className={styles.startBtn}>Let's explore here</button>
-    </Link>
-  </div> 
+ <div className={styles.secondSection}>
+
+ <FontAwesomeIcon icon={faWhatsapp} color="#25D366"  className={styles.FontAwesomeIcon} />
+          <FontAwesomeIcon icon={faInstagram} color="#E1306C"  className={styles.FontAwesomeIcon} />
+      <FontAwesomeIcon icon={faTwitter} color="#1DA1F2"  className={styles.FontAwesomeIcon} />
+          </div>
+ 
  
 </div>
 
   );
 }
 
-export default Landingpage;
+export default Errorpage;
 
 
 /* 

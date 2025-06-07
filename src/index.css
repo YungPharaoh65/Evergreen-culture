@@ -30,6 +30,27 @@ button{
   cursor: pointer;
 }
 
+/* In Navbar.module.css or a global CSS */
+.tippy-box[data-theme~='dark-tooltip'] {
+  background-color: rgba(34, 34, 34, 0.95); /* darker semi-transparent */
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.darkOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 10, 0.6); /* semi-transparent black */
+  z-index: 1000; /* higher than nav but lower than tooltip */
+  pointer-events: none; /* so it doesn’t block interaction */
+}
+
 .exitButton {
   border-radius: 10px;
   background-color: rgb(231, 53, 29);
