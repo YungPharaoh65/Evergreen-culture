@@ -103,7 +103,7 @@ function AdminPage() {
       default:
         return (
           <div className={styles.HomeSection}>
-            <Link to="/" className={styles.closeButton}><button>x</button></Link>
+            <Link to="/homepage" className={styles.closeButton}><button>x</button></Link>
             <h1>Admin Dashboard</h1>
 
             <input

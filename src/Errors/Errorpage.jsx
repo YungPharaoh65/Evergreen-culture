@@ -24,7 +24,7 @@ function Errorpage() {
   </div>
   
   <div className={styles.secondSection}>
-    <p className={styles.text}>just found yourself on a <b>404 error</b> <br />dont worry man, just check your network or click on refresh </p>
+    <p className={styles.text}>just found yourself on a <b>404 error</b> <br />dont worry man, just check your network or refresh</p>
   </div>
 
  <div className={styles.secondSection}>

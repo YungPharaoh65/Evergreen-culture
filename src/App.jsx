@@ -31,31 +31,33 @@ import NetworkWrapper from "./Errors/NetworkWrapper";
 function App() {
   return (
     <Router>
-    {/* */}  <NetworkWrapper>
+    {/* */}  <NetworkWrapper>   {/*AS YOU DISCONNECT, THIS WILL SHOW...*/}
        <Routes>
-        {/* Public Routes you are only allowed to mention the route once*/}
-         <Route path="/" element={<Landingpage />} />
-       
+        
+        {/* LANDING PAGE*/}  
+        <Route path="/" element={<Landingpage />} />  
+
+        {/* Public Routes */} 
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/Feedback" element={<Feedback />} />
         <Route path="/FactsAndInfo" element={<FactsAndInfo />} />
         <Route path="/Details" element={<Details />} />
         <Route path="/About" element={<About />} />
         <Route path="/Gardener" element={<Gardener />} />
+        <Route path="/Choosepath" element={<Choosepath />} />
+        {/* Public Routes */} 
+
+        {/*SIGN UP / LOGIN PAGE*/} 
         <Route path="/Signup" element={<Signup />} />
         <Route path="/login" element={<Login />} /> 
+        {/*SIGN UP / LOGIN PAGE*/} 
 
-        {/* Make sure this is pointing to the Login component */}
+        {/* PAYMENT PAGE */}
         <Route path="/Cartpage" element={<CartSidebar />} /> 
-        {/* Make sure this is pointing to the Login component */}
-
-        <Route path="/Choosepath" element={<Choosepath />} />
-        <Route path="/Plantbox" element={<Plantbox />} />
-        <Route path="/Gardenbox" element={<Gardenerbox />} />
-        <Route path="/Gardendetails" element={<Gardendetails />} />
-        <Route path="/Plantdetails" element={<Plantdetails />} />
+        {/* PAYMENT PAGE */}
+ 
         
-        {/* Protected Routes: Sign Up Page */}
+        {/* Protected Routes: DASHBOARD */}
         <Route
           path="/Dashboard"
           element={
@@ -64,14 +66,24 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+         {/* Routed to Plantdetails / Gardendetails page */}
+         <Route path="/Gardendetails/:id" element={<Gardendetails />} />
+         <Route path="/Plantdetails/:id" element={<Plantdetails />} /> 
+
+         <Route path="/Plantbox" element={<Plantbox />} />
+        <Route path="/Gardenbox" element={<Gardenerbox />} />
+        <Route path="/Gardendetails" element={<Gardendetails />} />
+        <Route path="/Plantdetails" element={<Plantdetails />} /> 
+        {/* Protected Routes: TO DASHBOARD */}
+        
+        {/*ADMIN PAGE*/} 
         <Route path="/Admin" element={<Admin />} />
         <Route path="/Admingardenform" element={<Admingardenform />} />
         <Route path="/Adminplantform" element={<Adminplantform />} />
-         
-         {/* Routed to Plantdetails / Gardendetails page */}
-         <Route path="/Gardendetails/:id" element={<Gardendetails />} />
-         <Route path="/Plantdetails/:id" element={<Plantdetails />} />
+         {/*ADMIN PAGE*/} 
 
+        
          {/* user details */}
          <Route path="/UserDetails" element={<UserDetails />} />
 
@@ -79,16 +91,12 @@ function App() {
          <Route path="/article" element={<ArticlePage />} />
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/SearchArticle" element={<SearchArticle/>} />
-         {/* <Route path="/" element={<Errorpage />} /> */}
+        {/*article pages*/}
         
-        
-
       </Routes>
-      </NetworkWrapper>
+     {/* */}  </NetworkWrapper>
     </Router>
   );
 }
-//  add other parts using this (between <Routes>):
-//<Route path="/" element={<Homepage />} />
-
+ 
 export default App;

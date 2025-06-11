@@ -7,7 +7,6 @@ const ProtectedRoute = ({ children }) => {
   const user = auth.currentUser;  // Check if the user is authenticated
   return user ? children : <Navigate to="/signup" />;
 };
-
-
+ 
 
 export default ProtectedRoute;

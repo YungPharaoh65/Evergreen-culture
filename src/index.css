@@ -26,9 +26,10 @@ body {
   margin-left: 2rem;
 }
 
-button{
+button, .FontAwesomeIcon{
   cursor: pointer;
 }
+ 
 
 /* In Navbar.module.css or a global CSS */
 .tippy-box[data-theme~='dark-tooltip'] {
