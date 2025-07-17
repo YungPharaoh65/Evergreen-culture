@@ -78,8 +78,13 @@ const Login = () => {
           onClick={handleGoogleSignIn}
         >
           <img src="/google-icon.png" alt="Google" />
-          Sign in with Google instead
+          Login with Google instead
         </button>
+
+        {/* Link to Login */}
+                <Link to="/Signup">
+                  <button type="button">Sign up Instead</button>
+                </Link>
       </form>
     </div>
   );
