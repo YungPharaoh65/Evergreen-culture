@@ -152,7 +152,7 @@ function FactsAndInfo() {
             </div>
 <br />
           <div className={styles.fourthSection}> 
-            <p className={styles.text}>privacy</p><p className={styles.text}>information</p><p className={styles.text}>community</p>
+            <p className={styles.text}>privacy</p><p className={styles.text}>articles</p><p className={styles.text}>information</p>
             </div>
 {/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}
 

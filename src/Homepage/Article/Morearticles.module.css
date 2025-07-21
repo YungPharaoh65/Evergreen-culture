@@ -1,0 +1,108 @@
+
+/*center items*//*center items*//*center items*/
+/*center items*//*center items*//*center items*/
+.pageWrapper { 
+  padding: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center; 
+  font-family: "Segoe UI", Roboto, sans-serif; 
+}
+
+.centerText {  
+  display: flex;
+  gap: 1rem;
+  justify-content: center; 
+  font-family: "Segoe UI", Roboto, sans-serif; 
+}
+
+.imgbox2 {
+  position: relative;
+  width: 15rem;
+  height: 15rem;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.imgbox2:hover {
+  transform: scale(1.03);
+}
+
+/* Overlay on hover */
+.imgbox2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0); /* Transparent by default */
+  transition: background-color 0.3s ease;
+  border-radius: 1rem;
+  z-index: 1;
+}
+
+.imgbox2:hover::before {
+  background-color: rgba(0, 0, 0, 0.3); /* Dark overlay on hover */
+}
+/*center items*//*center items*//*center items*/
+/*center items*//*center items*//*center items*/
+
+
+/*exit button*//*exit button*//*exit button*/
+.closeLink {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #444; 
+  padding: 0.4rem 0.8rem;
+  border-radius: 50%;
+  transition: background 0.3s;
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.closeLink:hover {
+  background-color: #ffbdbd;
+}
+/*exit button*//*exit button*//*exit button*/
+
+
+
+/*bottom tag*//*bottom tag*//*bottom tag*/
+/*bottom tag*//*bottom tag*//*bottom tag*/
+
+.fourthSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 1rem;
+  margin: 2rem auto;
+  max-width: 1200px;
+  margin-top: -1rem; 
+}
+
+.logoheader {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.text {
+  color: gray;
+  margin-top: -1rem;
+  cursor: pointer;
+}
+
+.FontAwesomeIcon{
+  font-size: 1.5rem;
+  cursor: pointer; 
+}
+/*bottom tag*//*bottom tag*//*bottom tag*/
+/*bottom tag*//*bottom tag*//*bottom tag*/

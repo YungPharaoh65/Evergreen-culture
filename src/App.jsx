@@ -27,11 +27,13 @@ import SearchArticle from "./Homepage/Article/SearchArticle";
 import Landingpage from "./Landing-page/Landingpage";
 import Errorpage from "./Errors/Errorpage";
 import NetworkWrapper from "./Errors/NetworkWrapper";
+import Morearticles from "./Homepage/Article/Morearticles";
+import AdminLogin from "./Homepage/Admin-page/adminLogin";
  
 function App() {
   return (
     <Router>
-    {/* */}  <NetworkWrapper>   {/*AS YOU DISCONNECT, THIS WILL SHOW...*/}
+    {/*   <NetworkWrapper>  */}  {/*AS YOU DISCONNECT, THIS WILL SHOW...*/} 
        <Routes>
         
         {/* LANDING PAGE*/}  
@@ -50,6 +52,8 @@ function App() {
         {/*SIGN UP / LOGIN PAGE*/} 
         <Route path="/Signup" element={<Signup />} />
         <Route path="/login" element={<Login />} /> 
+        <Route path="/AdminLogin" element={<AdminLogin />} /> 
+        
         {/*SIGN UP / LOGIN PAGE*/} 
 
         {/* PAYMENT PAGE */}
@@ -90,11 +94,13 @@ function App() {
         {/*article pages*/}
          <Route path="/article" element={<ArticlePage />} />
         <Route path="/plantDIY" element={<PlantDIY/>} />
+        <Route path="/Morearticles" element={<Morearticles/>} />
+        
         <Route path="/SearchArticle" element={<SearchArticle/>} />
         {/*article pages*/}
         
       </Routes>
-     {/* */}  </NetworkWrapper>
+     {/*   </NetworkWrapper> */}
     </Router>
   );
 }

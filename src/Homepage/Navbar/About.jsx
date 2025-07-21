@@ -1,62 +1,106 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { db, auth } from "../../Firebasedata/firebase";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  arrayUnion,
+  arrayRemove
+} from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
-import styles from "./About.module.css"; // Optional CSS file
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWhatsapp, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import styles from "./About.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
+
+const userEmojisList = [
+  "😄", "😎", "🤓", "🧐", "🤠", "🧙‍♂️", "🧛‍♀️", "🧟‍♂️", "👽", "🤖", "👻", "😆", "🦊", "🐼", "🐸"
+];
 
 function About() {
   const [topics, setTopics] = useState([]);
   const [newTopic, setNewTopic] = useState("");
   const [commentInputs, setCommentInputs] = useState({});
-  const [editingComment, setEditingComment] = useState({});
-  const [editingTopic, setEditingTopic] = useState({});
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  const handleNewTopic = () => {
-    if (newTopic.trim() === "") return;
-    setTopics([...topics, { title: newTopic, comments: [] }]);
+  // Map of userEmail to emoji
+  const userEmojiMapRef = useRef({});
+
+  // Helper: Get or assign emoji to user email
+  const getUserEmoji = (email) => {
+    if (!email) return "❓";
+    if (userEmojiMapRef.current[email]) {
+      return userEmojiMapRef.current[email];
+    } else {
+      // Assign a random emoji not yet assigned (try to avoid duplicates)
+      const assignedEmojis = Object.values(userEmojiMapRef.current);
+      const availableEmojis = userEmojisList.filter(e => !assignedEmojis.includes(e));
+      const emojiToAssign = availableEmojis.length > 0
+        ? availableEmojis[Math.floor(Math.random() * availableEmojis.length)]
+        : userEmojisList[Math.floor(Math.random() * userEmojisList.length)];
+      userEmojiMapRef.current[email] = emojiToAssign;
+      return emojiToAssign;
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    const unsubscribeData = onSnapshot(collection(db, "communityTopics"), (snapshot) => {
+      const topicData = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setTopics(topicData);
+    });
+
+    return () => {
+      unsubscribeAuth();
+      unsubscribeData();
+    };
+  }, []);
+
+  const handleNewTopic = async () => {
+    if (!newTopic.trim() || !user) return;
+    await addDoc(collection(db, "communityTopics"), {
+      title: newTopic,
+      comments: [],
+      authorId: user.uid,
+      createdAt: new Date()
+    });
     setNewTopic("");
   };
 
-  const handleCommentChange = (index, value) => {
-    setCommentInputs({ ...commentInputs, [index]: value });
+  const addComment = async (topicId, text) => {
+    if (!text.trim() || !user) return;
+    const topicRef = doc(db, "communityTopics", topicId);
+    const commentObj = { text, email: user.email };
+    await updateDoc(topicRef, {
+      comments: arrayUnion(commentObj)
+    });
+    setCommentInputs((prev) => ({ ...prev, [topicId]: "" }));
   };
 
-  const addComment = (index) => {
-    const comment = commentInputs[index];
-    if (!comment || comment.trim() === "") return;
-
-    const updatedTopics = [...topics];
-    updatedTopics[index].comments.push(comment);
-    setTopics(updatedTopics);
-    setCommentInputs({ ...commentInputs, [index]: "" });
+  const deleteComment = async (topicId, commentObj) => {
+    if (!user || user.email !== commentObj.email) return;
+    const topicRef = doc(db, "communityTopics", topicId);
+    await updateDoc(topicRef, {
+      comments: arrayRemove(commentObj)
+    });
   };
 
-  const deleteComment = (topicIndex, commentIndex) => {
-    const updatedTopics = [...topics];
-    updatedTopics[topicIndex].comments.splice(commentIndex, 1);
-    setTopics(updatedTopics);
-  };
-
-  const editComment = (topicIndex, commentIndex, newText) => {
-    const updatedTopics = [...topics];
-    updatedTopics[topicIndex].comments[commentIndex] = newText;
-    setTopics(updatedTopics);
-    setEditingComment({});
-  };
-
-  const deleteTopic = (index) => {
-    const updatedTopics = [...topics];
-    updatedTopics.splice(index, 1);
-    setTopics(updatedTopics);
-  };
-
-  const updateTopicTitle = (index, newTitle) => {
-    const updatedTopics = [...topics];
-    updatedTopics[index].title = newTitle;
-    setTopics(updatedTopics);
-    setEditingTopic({});
+  const deleteTopic = async (topicId) => {
+    if (!user) return;
+    await deleteDoc(doc(db, "communityTopics", topicId));
   };
 
   return (
@@ -67,179 +111,145 @@ function About() {
           <h1 style={{ textAlign: "center" }}> Community 🌱</h1>
           <p style={{ textAlign: "center" }}>Start a new discussion or join an existing one!</p>
 
-          {/* New Topic Input */}
           <div style={{ marginBottom: "2rem", textAlign: "center" }}>
             <input
               type="text"
               placeholder="Start a new topic..."
               value={newTopic}
               onChange={(e) => setNewTopic(e.target.value)}
-              style={{
-                padding: "0.5rem",
-                width: "70%",
-                maxWidth: "400px",
-                marginBottom: "0.5rem",
-              }}
+              style={{ padding: "0.5rem", width: "70%", maxWidth: "400px", marginBottom: "0.5rem" }}
             />
             <br />
-            <button onClick={handleNewTopic}>Post Topic</button>
+            <button
+              onClick={handleNewTopic}
+              style={{
+                padding: ".5rem",
+                borderRadius: "8px",
+                backgroundColor: "inherit",
+                marginBottom: "1.5rem",
+                border: "1px solid black"
+              }}
+            >
+              Post Topic
+            </button>
           </div>
 
-          {/* Topic List */}
-          {topics.map((topic, index) => (
+          {topics.map((topic) => (
             <div
-              key={index}
+              key={topic.id}
               style={{
                 border: "1px solid #ccc",
                 padding: "1rem",
                 borderRadius: "8px",
-                marginBottom: "1.5rem",
-                position: "relative",
+                marginBottom: "1.5rem"
               }}
-              onMouseEnter={() => setEditingTopic({ ...editingTopic, [index]: true })}
-              onMouseLeave={() => setEditingTopic({ ...editingTopic, [index]: false })}
             >
-              {editingTopic[index + "_editing"] ? (
-                <div>
-                  <input
-                    type="text"
-                    value={topic.title}
-                    onChange={(e) =>
-                      updateTopicTitle(index, e.target.value)
-                    }
-                    style={{ width: "100%", marginBottom: "0.5rem" }}
-                  />
-                  <button
-                    onClick={() =>
-                      updateTopicTitle(index, topic.title)
-                    }
-                  >
-                    <FontAwesomeIcon icon={faSeedling} color="#25D366"  className={styles.FontAwesomeIcon} />
-                  </button>
-                </div>
-              ) : (
-                <h3 style={{ display: "flex", justifyContent: "space-between" }}>
-                  {topic.title}
-                  {editingTopic[index] && (
-                    <span>
-                      <button
-                        onClick={() =>
-                          setEditingTopic({ ...editingTopic, [index + "_editing"]: true })
-                        }
-                      >
-                        ✏️
-                      </button>
-                      <button onClick={() => deleteTopic(index)}>🗑️</button>
-                    </span>
-                  )}
-                </h3>
-              )}
-
-              {/* Comments */}
-              <div style={{ marginLeft: "1rem" }}>
-                {topic.comments.length === 0 && (
-                  <p style={{ color: "#888" }}>No comments yet.</p>
+              <h3 style={{ display: "flex", justifyContent: "space-between" }}>
+                {topic.title}
+                {user?.uid === topic.authorId && (
+                  <button onClick={() => deleteTopic(topic.id)}>🗑️</button>
                 )}
-                {topic.comments.map((cmt, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding: "0.3rem 0",
-                      position: "relative",
-                    }}
-                    onMouseEnter={() =>
-                      setEditingComment({ ...editingComment, [`${index}-${i}`]: true })
-                    }
-                    onMouseLeave={() =>
-                      setEditingComment({ ...editingComment, [`${index}-${i}`]: false })
-                    }
-                  >
-                    {editingComment[`${index}-${i}_editing`] ? (
-                      <input
-                        value={cmt}
-                        onChange={(e) => {
-                          const updatedTopics = [...topics];
-                          updatedTopics[index].comments[i] = e.target.value;
-                          setTopics(updatedTopics);
-                        }}
-                        style={{ flex: 1, marginRight: "0.5rem" }}
-                      />
-                    ) : (
-                      <span>💬 {cmt}</span>
-                    )}
+              </h3>
 
-                    {editingComment[`${index}-${i}`] && (
-                      <span>
-                        {editingComment[`${index}-${i}_editing`] ? (
+              <div style={{ marginLeft: "1rem" }}>
+                {topic.comments.length === 0 ? (
+                  <p style={{ color: "#888" }}>No comments yet.</p>
+                ) : (
+                  topic.comments.map((cmt, idx) => {
+                    const isUserComment = user?.email === cmt.email;
+                    const emoji = getUserEmoji(cmt.email);
+                    return (
+                      <div
+                        key={idx}
+                        style={{
+                          display: "flex",
+                          justifyContent: isUserComment ? "flex-start" : "flex-end",
+                          alignItems: "center",
+                          padding: "0.3rem 0"
+                        }}
+                      >
+                        <div
+                          style={{
+                            backgroundColor: isUserComment ? "#dcf8c6" : "#eee",
+                            color: "#000",
+                            padding: "0.5rem 0.75rem",
+                            borderRadius: "15px",
+                            maxWidth: "70%",
+                            wordBreak: "break-word",
+                            textAlign: isUserComment ? "left" : "right",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.5rem",
+                            fontSize: "1rem"
+                          }}
+                        >
+                          <span style={{ fontSize: "1.4rem" }}>{emoji}</span>
+                          <div>
+                            {cmt.text}
+                            <br />
+                            <small style={{ color: "#555", fontSize: "0.8rem" }}>— {cmt.email}</small>
+                          </div>
+                        </div>
+                        {isUserComment && (
                           <button
-                            onClick={() =>
-                              setEditingComment({
-                                ...editingComment,
-                                [`${index}-${i}_editing`]: false,
-                              })
-                            }
+                            onClick={() => deleteComment(topic.id, cmt)}
+                            style={{ marginLeft: "0.5rem" }}
                           >
-                            Save
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() =>
-                              setEditingComment({
-                                ...editingComment,
-                                [`${index}-${i}_editing`]: true,
-                              })
-                            }
-                          >
-                            ✏️
+                            🗑️
                           </button>
                         )}
-                        <button onClick={() => deleteComment(index, i)}>🗑️</button>
-                      </span>
-                    )}
-                  </div>
-                ))}
+                      </div>
+                    );
+                  })
+                )}
               </div>
 
-              {/* Add Comment */}
               <div style={{ marginTop: "1rem", textAlign: "center" }}>
                 <input
                   type="text"
                   placeholder="Add a comment..."
-                  value={commentInputs[index] || ""}
-                  onChange={(e) => handleCommentChange(index, e.target.value)}
+                  value={commentInputs[topic.id] || ""}
+                  onChange={(e) =>
+                    setCommentInputs((prev) => ({ ...prev, [topic.id]: e.target.value }))
+                  }
                   style={{ padding: "0.4rem", width: "70%" }}
                 />
-                <button onClick={() => addComment(index)} style={{ marginLeft: "0.5rem" }}>
+                <button
+                  onClick={() => addComment(topic.id, commentInputs[topic.id])}
+                  style={{ marginLeft: "0.5rem" }}
+                >
                   Comment
                 </button>
               </div>
             </div>
           ))}
 
-{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/} 
- <div className={styles.secondSection}>
-  <div className={styles.logoheader}> Evergreen <FontAwesomeIcon icon={faSeedling} color="#25D366"  className={styles.FontAwesomeIcon} /></div>
- </div>
-
-<div className={styles.secondSection}>
- <p className={styles.text}>its more than just a website, its a digital geography of nature</p>
- </div>
+          {/* BOTTOM TEXT & SOCIALS */}
+          <div className={styles.secondSection}>
+            <div className={styles.logoheader}>
+              Evergreen <FontAwesomeIcon icon={faSeedling} color="#25D366" className={styles.FontAwesomeIcon} />
+            </div>
+          </div>
 
           <div className={styles.secondSection}>
-
- <FontAwesomeIcon icon={faWhatsapp} color="#25D366"  className={styles.FontAwesomeIcon} />
-          <FontAwesomeIcon icon={faInstagram} color="#E1306C"  className={styles.FontAwesomeIcon} />
-      <FontAwesomeIcon icon={faTwitter} color="#1DA1F2"  className={styles.FontAwesomeIcon} />
+            <p className={styles.text}>
+              ( click the word{" "}
+              <b
+                onClick={() => navigate("/Choosepath")}
+                style={{ color: "#2c7446ff", cursor: "pointer" }}
+              >
+                "dashboard"
+              </b>{" "}
+              to see your options )
+            </p>
           </div>
-{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}
 
-
-           
+          <div className={styles.secondSection}>
+            <FontAwesomeIcon icon={faWhatsapp} color="#25D366" className={styles.FontAwesomeIcon} />
+            <FontAwesomeIcon icon={faInstagram} color="#E1306C" className={styles.FontAwesomeIcon} />
+            <FontAwesomeIcon icon={faTwitter} color="#1DA1F2" className={styles.FontAwesomeIcon} />
+          </div>
         </div>
-       
       </div>
     </div>
   );

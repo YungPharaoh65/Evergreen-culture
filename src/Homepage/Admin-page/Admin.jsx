@@ -3,7 +3,7 @@ import Admingardenform from "../../Forms/Admingardenform";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { db } from "../../Firebasedata/firebase";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, onSnapshot } from "firebase/firestore";
 import styles from "./Admin.module.css";
 
 function AdminPage() {
@@ -11,6 +11,7 @@ function AdminPage() {
   const [gardenerData, setGardenerData] = useState([]);
   const [gardenFormData, setGardenFormData] = useState([]);
   const [feedbackData, setFeedbackData] = useState([]);
+  const [communityTopics, setCommunityTopics] = useState([]);  // NEW STATE
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -47,6 +48,21 @@ function AdminPage() {
     }
   };
 
+  // Listen for communityTopics realtime updates
+  useEffect(() => {
+    const unsubscribeCommunity = onSnapshot(collection(db, "communityTopics"), (snapshot) => {
+      const topicsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setCommunityTopics(topicsData);
+    }, (error) => {
+      console.error("Error fetching community topics:", error);
+    });
+
+    return () => unsubscribeCommunity();
+  }, []);
+
   useEffect(() => {
     fetchGardenerData();
     fetchGardenFormData();
@@ -54,20 +70,19 @@ function AdminPage() {
   }, []);
 
   useEffect(() => {
-    if (gardenerData.length && gardenFormData.length && feedbackData.length) {
+    if (gardenerData.length && gardenFormData.length && feedbackData.length && communityTopics.length >= 0) {
       setLoading(false);
     }
-  }, [gardenerData, gardenFormData, feedbackData]);
+  }, [gardenerData, gardenFormData, feedbackData, communityTopics]);
 
-  
-  // Filter gardeners by fullName or idNumber
+  // Filters (same as your previous code)...
+
   const filterGardeners = (data) =>
     data.filter(item =>
       (item.fullName && item.fullName.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (item.idNumber && item.idNumber.toString().toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
-  // Filter garden forms by name or category
   const filterGardenForms = (data) =>
     data.filter(item =>
       (item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
@@ -75,7 +90,6 @@ function AdminPage() {
         item.category.some(cat => cat.toLowerCase().includes(searchTerm.toLowerCase())))
     );
 
-  // Filter feedbacks by gardener fullName, user, or comment
   const filterFeedbacks = (data) => {
     const term = searchTerm.toLowerCase();
     return data.filter(feedback => {
@@ -94,12 +108,66 @@ function AdminPage() {
     });
   };
 
+  const filterCommunityTopics = (data) => 
+    data.filter(topic => topic.title.toLowerCase().includes(searchTerm.toLowerCase()));
+
   const renderView = () => {
     switch (activeView) {
       case "plants":
         return <Adminforms />;
       case "gardeners":
         return <Admingardenform />;
+      case "community": // NEW CASE for community page
+        return (
+          <div>
+            <h1>Community Topics</h1>
+            <input
+              type="text"
+              placeholder="Search topics..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={styles.searchBar}
+            />
+            <div className={styles.TableContainer} style={{overflowX: "auto"}}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Author ID</th>
+                    <th>Created At</th>
+                    <th>Comments</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filterCommunityTopics(communityTopics).length > 0 ? (
+                    filterCommunityTopics(communityTopics).map((topic, idx) => (
+                      <tr key={idx}>
+                        <td>{topic.title}</td>
+                        <td>{topic.authorId || "N/A"}</td>
+                        <td>{topic.createdAt?.toDate ? topic.createdAt.toDate().toLocaleString() : "N/A"}</td>
+                        <td>
+                          {topic.comments.length === 0 ? (
+                            "No comments"
+                          ) : (
+                            <ul style={{ paddingLeft: "1rem", margin: 0 }}>
+                              {topic.comments.map((cmt, i) => (
+                                <li key={i}>
+                                  <b>{cmt.email}:</b> {cmt.text}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr><td colSpan="4">No community topics found.</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
       default:
         return (
           <div className={styles.HomeSection}>
@@ -113,7 +181,6 @@ function AdminPage() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className={styles.searchBar}
             />
-
             {loading ? (
               <p>Loading...</p>
             ) : (
@@ -235,14 +302,34 @@ function AdminPage() {
   return (
     <div className={styles.AdminContainer}>
       <div className={styles.ToggleBar}>
-        <button className={activeView === "home" ? styles.Active : ""} onClick={() => setActiveView("home")}>Dashboard</button>
-        <button className={activeView === "plants" ? styles.Active : ""} onClick={() => setActiveView("plants")}>Plant Form</button>
-        <button className={activeView === "gardeners" ? styles.Active : ""} onClick={() => setActiveView("gardeners")}>Gardener Form</button>
+        <button
+          className={activeView === "home" ? styles.Active : ""}
+          onClick={() => setActiveView("home")}
+        >
+          Dashboard
+        </button>
+        <button
+          className={activeView === "plants" ? styles.Active : ""}
+          onClick={() => setActiveView("plants")}
+        >
+          Plant Form
+        </button>
+        <button
+          className={activeView === "gardeners" ? styles.Active : ""}
+          onClick={() => setActiveView("gardeners")}
+        >
+          Gardener Form
+        </button>
+        <button
+          className={activeView === "community" ? styles.Active : ""}
+          onClick={() => setActiveView("community")}
+        >
+          Community Page
+        </button>
       </div>
-      <div className={styles.ViewSection}>
-        {renderView()}
-      </div>
-      <br /><br />
+      <div className={styles.ViewSection}>{renderView()}</div>
+      <br />
+      <br />
     </div>
   );
 }

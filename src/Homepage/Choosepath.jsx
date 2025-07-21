@@ -16,13 +16,10 @@ function Choosepath() {
           <button>Go to Dashboard</button>
         </Link>
 
-        <Link to="/Admin">
+        <Link to="/adminLogin">
           <button>Admin site</button>
         </Link>
-
-        <Link to="/Gardener">
-          <button>Garden Hire site</button>
-        </Link>
+ 
       </div>
     </div>
   );

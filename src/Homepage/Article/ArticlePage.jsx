@@ -75,7 +75,7 @@ function ArticlePage() {
             With a little love and light, you’ll have a showstopper plant that thrives and blooms for years.
           </p>
 
-          <button className={styles.readMoreBtn}>🌿 See Other Easy-Care Plants</button>
+         <Link to={"/Morearticles"}> <button className={styles.readMoreBtn}>🌿 See Other Easy-Care Plants</button></Link>
         </div>
       </div>
     </div>

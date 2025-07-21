@@ -98,7 +98,7 @@ function Homepage() {
       {/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
 
 <div className={styles.secondSection}>
-  <h1 className={styles.newHybrid}>New Hybrid</h1>
+  <h1 className={styles.newHybrid}>Plant <d style={{ color:"#25D366"}}>&</d> Gardener Dashboard</h1>
 
   <p className={styles.centerText}>many types of plants to research and explore... <br />
   whether you want to search for your own or want somebody to search for you. </p>
@@ -122,7 +122,7 @@ function Homepage() {
        <h1>Everything <d style={{ color:"#25D366"}}>green</d> </h1>
     
     <div className={styles.positionOne}>
-      <p >explore the possibilities of plantation and gardening <br />
+      <p >explore the Dashboard to get to select your options<br />
       made easier with Evergreen-culture
       <br />
       Join us to explore more</p>
@@ -142,7 +142,7 @@ function Homepage() {
     <p>learn about how we show information <br />
     abd how they benefit us on the <br />
     <b><u>article</u></b> site </p> 
-    <Link to="/FactsAndInfo"><p>LEARN MORE 🌳</p> </Link> 
+    <button className={styles.homeButton} onClick={() => navigate('/Choosepath')}>LEARN MORE HERE 🌳</button>  
      
 
      
@@ -172,16 +172,16 @@ function Homepage() {
    {/**FOURTH SECTION */}{/**FOURTH SECTION */}{/**FOURTH SECTION */}
 
    <div className={styles.thirdSection}>
-       <h1>Explore your <d style={{ color:"#25D366"}}>options</d> <br />to find what you like<br />by choice</h1>
+       <h1>Explore our social groups <br />through the <br /> <d style={{ color:"#25D366"}}>Community </d>  page</h1>
       <div className={styles.imgbox1}></div>
 
-      <p className={styles.positionOne}>explore the possibilities of hiring options or DIYs...<br />
+      <p className={styles.positionOne}>explore the possibilities of more social groups<br />
       made easier with Evergreen-culture
       <br />
-      click the button below to explore more</p>
+      find out more passionate enthusiats here...</p>
        
       {/* Link component for navigation */}
-      <Link to="/Choosepath">
+      <Link to="/About">
         <button className={styles.homeButton}>Get Started with us</button>
       </Link>
 </div>
@@ -201,7 +201,7 @@ function Homepage() {
         </div>
          
         <div className={styles.sectionTwo}>
-          <h3>Contact</h3>
+          <h3>Contact / Enquries</h3>
           <p>Email: info@Evergreen.com</p>
           <p>Phone: +123 456 7890</p>
         </div>
