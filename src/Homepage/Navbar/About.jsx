@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import Navbar from "./Navbar";
 import styles from "./About.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,8 +27,7 @@ function About() {
   const [topics, setTopics] = useState([]);
   const [newTopic, setNewTopic] = useState("");
   const [commentInputs, setCommentInputs] = useState({});
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const [user, setUser] = useState(null); 
 
   // Map of userEmail to emoji
   const userEmojiMapRef = useRef({});
@@ -102,6 +101,8 @@ function About() {
     if (!user) return;
     await deleteDoc(doc(db, "communityTopics", topicId));
   };
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -235,12 +236,12 @@ function About() {
             <p className={styles.text}>
               ( click the word{" "}
               <b
-                onClick={() => navigate("/Choosepath")}
-                style={{ color: "#2c7446ff", cursor: "pointer" }}
-              >
-                "dashboard"
-              </b>{" "}
-              to see your options )
+      onClick={() => navigate("/Choosepath")}
+      style={{ color: "#2c7446ff", cursor: "pointer" }}
+    >
+      dashboard  </b>to see your options )
+   
+               
             </p>
           </div>
 
