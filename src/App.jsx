@@ -39,6 +39,8 @@ function App() {
         {/* LANDING PAGE*/}  
         <Route path="/" element={<Landingpage />} />  
 
+<Route path="/userAccount" element={<userAccount />} />  
+
         {/* Public Routes */} 
         <Route path="/homepage" element={<Homepage />} />
         <Route path="/Feedback" element={<Feedback />} />

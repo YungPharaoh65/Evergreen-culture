@@ -4,7 +4,6 @@ import styles from "./Dashboard.module.css";
 import Plantbox from "../Gardener-page/Gardernplant-box/Plantbox";
 import Gardenerbox from "../Gardener-page/Gardernplant-box/Gardenerbox";
 import CartSidebar from "../Gardener-page/Gardernplant-box/Cartpage";
-import UserDetails from "./userAccount/userDetails"; 
 
 function Dashboard() {
   const [showPlant, setShowPlant] = useState(true);

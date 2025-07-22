@@ -29,3 +29,6 @@ dist-ssr
 
 #documentation file
 .docs
+
+# Local Netlify folder
+.netlify
