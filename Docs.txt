@@ -1,4 +1,4 @@
-ABOUT PROJECT:
+ABOUT PROJECT (LINK TO PROJECT): https://unrivaled-chebakia-3dfffb.netlify.app/homepage
 
 The Evergreen project composes of 3 sections of the entire project 
 that is implemented in the creation of the projects:
