@@ -19,8 +19,7 @@ import CartSidebar from "./Homepage/Gardener-page/Gardernplant-box/Cartpage";
 import Gardendetails from "./Homepage/Dashboard/GardenPlantdetails/Gardendetails";
 import Plantdetails from "./Homepage/Dashboard/GardenPlantdetails/Plantdetails";
 import Admingardenform from "./Forms/Admingardenform";
-import Adminplantform from "./Forms/Admingardenform";
-import UserDetails from "./Homepage/Dashboard/userAccount/userDetails"; 
+import Adminplantform from "./Forms/Admingardenform"; 
 import ArticlePage from "./Homepage/Article/Articlepage"; 
 import PlantDIY from "./Homepage/Article/PlantDIY";
 import SearchArticle from "./Homepage/Article/SearchArticle"; 
@@ -90,8 +89,7 @@ function App() {
          {/*ADMIN PAGE*/} 
 
         
-         {/* user details */}
-         <Route path="/UserDetails" element={<UserDetails />} />
+          
 
         {/*article pages*/}
          <Route path="/article" element={<ArticlePage />} />

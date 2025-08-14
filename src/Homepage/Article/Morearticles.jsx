@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./Morearticles.module.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from "./Morearticles.module.css"; 
 import { faWhatsapp, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 
