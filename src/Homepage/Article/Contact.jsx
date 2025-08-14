@@ -6,14 +6,14 @@ import { faWhatsapp, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";;
 
  
-function Morearticles() {
+function Contact() {
   return (
 
     <>
     <Link to={"/homepage"}><div className={styles.closeLink}>x</div></Link>
      <br />
      <br />
-     <h1>More <d style={{ color:"#25D366"}}>Articles</d> & <d style={{ color:"#25D366"}}>tips </d> to explore </h1> 
+     <h1>Contact <d style={{ color:"#25D366"}}>Us</d>  <d style={{ color:"#25D366"}}>here </d> to explore </h1> 
      
       
     
@@ -21,4 +21,4 @@ function Morearticles() {
   );
 }
 
-export default Morearticles;
+export default Contact;

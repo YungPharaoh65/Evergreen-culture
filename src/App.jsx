@@ -19,8 +19,7 @@ import CartSidebar from "./Homepage/Gardener-page/Gardernplant-box/Cartpage";
 import Gardendetails from "./Homepage/Dashboard/GardenPlantdetails/Gardendetails";
 import Plantdetails from "./Homepage/Dashboard/GardenPlantdetails/Plantdetails";
 import Admingardenform from "./Forms/Admingardenform";
-import Adminplantform from "./Forms/Admingardenform"; 
-import ArticlePage from "./Homepage/Article/Articlepage"; 
+import Adminplantform from "./Forms/Admingardenform";  
 import PlantDIY from "./Homepage/Article/PlantDIY";
 import SearchArticle from "./Homepage/Article/SearchArticle"; 
 import Landingpage from "./Landing-page/Landingpage";
@@ -28,6 +27,8 @@ import Errorpage from "./Errors/Errorpage";
 import NetworkWrapper from "./Errors/NetworkWrapper";
 import Morearticles from "./Homepage/Article/Morearticles";
 import AdminLogin from "./Homepage/Admin-page/adminLogin";
+import ArticlePage from "./Homepage/Article/Articlepage";
+import Contact from "./Homepage/Article/Contact";
  
 function App() {
   return (
@@ -87,17 +88,16 @@ function App() {
         <Route path="/Admingardenform" element={<Admingardenform />} />
         <Route path="/Adminplantform" element={<Adminplantform />} />
          {/*ADMIN PAGE*/} 
-
-        
-          
-
+  
         {/*article pages*/}
-         <Route path="/article" element={<ArticlePage />} />
+         <Route path="/article" element={<ArticlePage/>} />
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/Morearticles" element={<Morearticles/>} />
         
         <Route path="/SearchArticle" element={<SearchArticle/>} />
         {/*article pages*/}
+
+        <Route path="/Contact" element={<Contact/>} />
         
       </Routes>
      {/*   </NetworkWrapper> */}

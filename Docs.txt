@@ -32,4 +32,48 @@ This site is a host for all three areas of business
  state their views about the company that they have around
  showing transparency between both parties. 
  
+ ////////////////////////////////////////////////
+
+ MORE ARTICLES: 
+
  
+<div className={styles.pageWrapper}>
+
+<div className={styles.imgbox2}></div>
+<div className={styles.imgbox2}></div>
+<div className={styles.imgbox2}></div>
+<div className={styles.imgbox2}></div>
+
+</div>
+
+<div className={styles.pageWrapper}>
+
+<div className={styles.imgbox2}></div>
+<div className={styles.imgbox2}></div>
+<div className={styles.imgbox2}></div>
+<div className={styles.imgbox2}></div>
+
+</div>
+
+{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/} 
+ <div className={styles.fourthSection}>
+  <div className={styles.logoheader}>Evergreen <FontAwesomeIcon icon={faSeedling} color="#25D366"  className={styles.FontAwesomeIcon} /></div>
+ </div>
+
+<div className={styles.fourthSection}>
+ <p className={styles.text}>privacy</p><p className={styles.text}>information</p><p className={styles.text}>community</p>
+            
+ </div>
+
+          <div className={styles.fourthSection}>
+
+  <FontAwesomeIcon icon={faWhatsapp} color="#25D366"  className={styles.FontAwesomeIcon} />
+           <FontAwesomeIcon icon={faInstagram} color="#E1306C"  className={styles.FontAwesomeIcon} />
+       <FontAwesomeIcon icon={faTwitter} color="#1DA1F2"  className={styles.FontAwesomeIcon} />
+            </div>
+<br />
+          <div className={styles.fourthSection}> 
+            </div>
+{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}{/*BOTTOM TEXT*/}
+
+  
