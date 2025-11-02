@@ -142,7 +142,7 @@ function Homepage() {
     <p>learn about how we show information <br />
     abd how they benefit us on the <br />
     <b><u>article</u></b> site </p> 
-    <button className={styles.homeButton} onClick={() => navigate('/Choosepath')}>LEARN MORE HERE 🌳</button>  
+    <button className={styles.homeButton} onClick={() => navigate('/Morearticles')}>LEARN MORE HERE 🌳</button>  
      
 
      

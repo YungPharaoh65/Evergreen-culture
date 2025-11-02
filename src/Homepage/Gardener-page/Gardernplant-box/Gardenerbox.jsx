@@ -76,7 +76,7 @@ function Gardenerbox() {
                       backgroundPosition: 'center'
                     }}
                   ></div>
-
+<br />
                   {/* FILTER TAGS */}
                   <div className={styles.subtopicsmove}>
                     {gardener.filters?.map((filter, idx) => (
@@ -94,6 +94,7 @@ function Gardenerbox() {
                   {/* MORE INFO */}
                   <a href="#">more info</a>
 
+<br /><br /><br />
                   {/* LOCATION */}
                   <div className={styles.location}>
                     {gardener.preferredLocation || "Location not set"}

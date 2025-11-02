@@ -7,7 +7,7 @@ function ArticlePage() {
     <div className={styles.pageWrapper}>
       {/* Close Button */}
       <div className={styles.exitButton}>
-        <Link to="/factsAndInfo" className={styles.closeLink}>
+        <Link to="/Morearticles" className={styles.closeLink}>
           ✕
         </Link>
       </div>

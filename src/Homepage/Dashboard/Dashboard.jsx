@@ -18,6 +18,7 @@ function Dashboard() {
   const toggleComponent = () => setShowPlant((prev) => !prev);
 
   return (
+    
     <div className={styles.DashboardContainer}>
       <Link to="/Choosepath">
         <button className={styles.exitButton}>x</button>

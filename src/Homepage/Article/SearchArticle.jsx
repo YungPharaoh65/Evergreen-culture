@@ -5,9 +5,7 @@ import styles from "./SearchArticle.module.css";
 function SearchArticle() {
   return (
     <div > 
-        <Link to="/FactsAndInfo">
-        <button>x</button>
-        </Link>  
+          
            
 {/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */} 
 <div className={styles.secondSection}>
@@ -16,15 +14,16 @@ function SearchArticle() {
  
 <div className={styles.centerimgbox2}>
 
-<Link to="/article">
+<Link to="/Articlepage">
 <button>plantation</button> 
 </Link>
-<Link to="/article">
+<Link to="/Articlepage">
 <button>plantation</button> 
 </Link>
-<Link to="/article">
+<Link to="/Articlepage">
 <button>plantation</button> 
-</Link><Link to="/article">
+</Link>
+<Link to="/Articlepage">
 <button>plantation</button> 
 </Link>
  

@@ -37,10 +37,6 @@ function Navbar() {
             <Link to="/About" className={styles.navLink}>Community</Link>
           </li>
           <li>
-            <Link to="/Contact" className={styles.navLink}>Contact</Link>
-          </li>
-
-          <li>
             <Link to="/Morearticles" className={styles.navLink}>Article</Link>
           </li>
          

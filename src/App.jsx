@@ -33,7 +33,7 @@ import Contact from "./Homepage/Article/Contact";
 function App() {
   return (
     <Router>
-    {/*   <NetworkWrapper>  */}  {/*AS YOU DISCONNECT, THIS WILL SHOW...*/} 
+    <NetworkWrapper>   {/*AS YOU DISCONNECT, THIS WILL SHOW...*/} 
        <Routes>
         
         {/* LANDING PAGE*/}  
@@ -90,7 +90,7 @@ function App() {
          {/*ADMIN PAGE*/} 
   
         {/*article pages*/}
-         <Route path="/article" element={<ArticlePage/>} />
+         <Route path="/Articlepage" element={<ArticlePage/>} />
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/Morearticles" element={<Morearticles/>} />
         
@@ -100,7 +100,7 @@ function App() {
         <Route path="/Contact" element={<Contact/>} />
         
       </Routes>
-     {/*   </NetworkWrapper> */}
+       </NetworkWrapper>  
     </Router>
   );
 }
