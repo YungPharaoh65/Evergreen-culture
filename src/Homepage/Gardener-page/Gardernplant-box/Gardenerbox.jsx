@@ -14,92 +14,58 @@ function Gardenerbox() {
     const fetchGardeners = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "gardeners"));
-        const data = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
+        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         setGardeners(data);
       } catch (error) {
-        console.error("Error fetching gardeners: ", error);
+        console.error("Error fetching gardeners:", error);
       }
     };
-
     fetchGardeners();
   }, []);
 
   const filteredGardeners = selectedFilter === 'All'
     ? gardeners
-    : gardeners.filter(gardener =>
-        gardener.filters?.includes(selectedFilter) || (selectedFilter === "Other" && !gardener.filters?.some(filter => ["Landscaping", "Cultivating"].includes(filter)))
-      );
+    : gardeners.filter(g => g.filters?.includes(selectedFilter) || (selectedFilter === "Other" && !g.filters?.some(f => ["Landscaping", "Cultivating"].includes(f))));
 
   return (
     <div className={styles.plantboxWrapper}>
-
-      {/* FILTER BUTTONS */}
       <div className={styles.subtopicsmove}>
-        {filterOptions.map((filter) => (
-          <button
-            key={filter}
-            className={`${styles.subheadings} ${selectedFilter === filter ? styles.activeFilter : ''}`}
-            onClick={() => setSelectedFilter(filter)}
-          >
+        {filterOptions.map(filter => (
+          <button key={filter} onClick={() => setSelectedFilter(filter)}
+            className={`${styles.subheadings} ${selectedFilter === filter ? styles.activeFilter : ""}`}>
             {filter}
           </button>
         ))}
-        <br /><br />
       </div>
 
-      {/* GARDENER PROFILES */}
       <div className={styles.centerbar2}>
         {filteredGardeners.length === 0 ? (
           <p style={{ textAlign: "center", color: "gray" }}>No gardeners match the filter.</p>
         ) : (
-          filteredGardeners.map((gardener) => {
-            // Get the image URL from localStorage
-            const gardenerImage = localStorage.getItem(gardener.id);
-            console.log(gardener.id, gardenerImage); // Check what image is fetched
-
-            // Default to placeholder image if no image is found in localStorage
-            const imageUrl = gardenerImage ? gardenerImage : "https://via.placeholder.com/150";
+          filteredGardeners.map(g => {
+            const imageUrl = g.profileImageURL || "https://via.placeholder.com/150";
 
             return (
-              <Link to={`/Gardendetails/${gardener.id}`} key={gardener.id}>
+              <Link to={`/Gardendetails/${g.id}`} key={g.id}>
                 <div className={styles.dashboardContainer1}>
-
-                  {/* IMAGE PLACEHOLDER */}
-                  <div
-                    className={styles.image}
+                  <div className={styles.image}
                     style={{
-                      backgroundImage: `url(${imageUrl})`, // Set the image from localStorage or placeholder
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center'
-                    }}
-                  ></div>
-<br />
-                  {/* FILTER TAGS */}
+                      backgroundImage: `url(${imageUrl})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      width: "150px",
+                      height: "150px",
+                      borderRadius: "8px"
+                    }}>
+                  </div>
+
                   <div className={styles.subtopicsmove}>
-                    {gardener.filters?.map((filter, idx) => (
-                      <button key={idx} className={styles.subtopics}>
-                        {filter}
-                      </button>
-                    ))}
+                    {g.filters?.map((f, idx) => <button key={idx} className={styles.subtopics}>{f}</button>)}
                   </div>
 
-                  {/* GARDENER NAME */}
-                  <div className={styles.header}>
-                    {gardener.fullName || "Unnamed Gardener"}
-                  </div>
-
-                  {/* MORE INFO */}
+                  <div className={styles.header}>{g.fullName || "Unnamed Gardener"}</div>
                   <a href="#">more info</a>
-
-<br /><br /><br />
-                  {/* LOCATION */}
-                  <div className={styles.location}>
-                    {gardener.preferredLocation || "Location not set"}
-                  </div>
-
+                  <div className={styles.location}>{g.preferredLocation || "Location not set"}</div>
                 </div>
               </Link>
             );
