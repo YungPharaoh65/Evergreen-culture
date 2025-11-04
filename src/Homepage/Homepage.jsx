@@ -7,6 +7,7 @@ import { faWhatsapp, faInstagram, faTwitter } from '@fortawesome/free-brands-svg
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import Chat from './Chat/Chat';
 
 
 {/*ADD A CHATBOT GUIDE TO HELP NAVIGATE AS WELL */}
@@ -70,6 +71,8 @@ function Homepage() {
        
       {/* Link component for navigation */}
 
+      <Chat/>
+
 <div className={styles.positionOne}>
        <Tippy content="Click here to sign up!"
               visible={showTooltip}
@@ -89,11 +92,7 @@ function Homepage() {
 
       {/**FIRST SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
 
- <li>
-            <button onClick={() => localStorage.removeItem("signupTooltipShown")}>
-              Reset Tooltip Storage
-            </button>
-          </li>
+
 <br /><br /><br />
       {/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
 

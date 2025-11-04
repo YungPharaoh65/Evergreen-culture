@@ -29,6 +29,7 @@ import Morearticles from "./Homepage/Article/Morearticles";
 import AdminLogin from "./Homepage/Admin-page/adminLogin";
 import ArticlePage from "./Homepage/Article/Articlepage";
 import Contact from "./Homepage/Article/Contact";
+import Chat from "./Homepage/Chat/Chat";
  
 function App() {
   return (
@@ -98,6 +99,8 @@ function App() {
         {/*article pages*/}
 
         <Route path="/Contact" element={<Contact/>} />
+
+        <Route path="/Chat" element={<Chat/>} />
         
       </Routes>
        </NetworkWrapper>  

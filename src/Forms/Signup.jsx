@@ -90,12 +90,12 @@ function Signup() {
         </button>
 
         {/* Google Sign Up Button */}
-        <button
+        <button className={styles.signupBtn2}
           type="button"
           onClick={() => handleGoogleSignUp(navigate)}
-          className={styles.googleBtn}
+          
         >
-          Sign Up with Google
+          Login with Google 
         </button>
 
         {/* Link to Login */}

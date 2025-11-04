@@ -4,6 +4,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../Firebasedata/firebase";
 import { supabase } from "../supabaseClient"; // 👈 Import Supabase
 
+
 function Adminforms() {
   const [form, setForm] = useState({
     name: "",

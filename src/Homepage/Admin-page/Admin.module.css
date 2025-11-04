@@ -6,6 +6,21 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+
+  .deleteBtn {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background-color: #c1121f;
+}
+
   
   .TableContainer {
     margin-top: 20px;

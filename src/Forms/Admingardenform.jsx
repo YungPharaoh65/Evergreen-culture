@@ -5,7 +5,6 @@ import { db } from "../Firebasedata/firebase"; // assumes Firestore
 import { getAuth } from "firebase/auth";
 import { supabase } from "../supabaseClient";
 
-
 function Admingardenform() {
   const [form, setForm] = useState({
     fullName: "",
@@ -46,7 +45,10 @@ function Admingardenform() {
     const file = e.target.files[0];
     if (!file) return;
 
-    if (!file.type.startsWith("image/")) return setImageError("Only image files are allowed.");
+    if (!file.type.startsWith("image/")) {
+      setImageError("Only image files are allowed.");
+      return;
+    }
 
     setImageError(null);
     setForm((prev) => ({ ...prev, profileImage: file }));
@@ -56,21 +58,32 @@ function Admingardenform() {
     localStorage.setItem("profileImage", previewURL);
   };
 
+  // ✅ Upload image to Supabase (gardenImage bucket)
   const uploadImageToSupabase = async (file) => {
-    const fileName = `public/${Date.now()}_${file.name}`;
-    const { error } = await supabase.storage
-      .from("gardenImage") // <-- your separate bucket
-      .upload(fileName, file, { cacheControl: "3600", upsert: false });
+    try {
+      const fileName = `${Date.now()}_${file.name}`;
+      const { data, error } = await supabase.storage
+        .from("gardenImage") // your separate bucket
+        .upload(fileName, file, { cacheControl: "3600", upsert: false });
 
-    if (error) throw error;
+      if (error) throw error;
 
-    const { data: publicData } = supabase.storage
-      .from("gardenImage")
-      .getPublicUrl(fileName);
+      const { data: publicData } = supabase.storage
+        .from("gardenImage")
+        .getPublicUrl(fileName);
 
-    return publicData.publicUrl;
+      if (!publicData || !publicData.publicUrl) {
+        throw new Error("Could not get public image URL");
+      }
+
+      return publicData.publicUrl;
+    } catch (err) {
+      console.error("Supabase upload failed:", err.message);
+      throw new Error("Image upload failed");
+    }
   };
 
+  // ✅ Handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -103,13 +116,15 @@ function Admingardenform() {
         customFilter: form.customFilter || "",
         aboutMe: form.aboutMe || "",
         availability: form.availability,
-        profileImageURL,
-        createdAt: new Date(),
+        profileImageURL: profileImageURL || "",
+        createdAt: new Date().toISOString(),
       };
 
       await addDoc(collection(db, "gardeners"), gardenerData);
 
       alert("Gardener information submitted successfully!");
+
+      // Reset form
       setForm({
         fullName: "",
         preferredLocation: "",
@@ -124,7 +139,7 @@ function Admingardenform() {
       setImagePreview(null);
       localStorage.removeItem("profileImage");
     } catch (error) {
-      console.error("Submission error:", error.message);
+      console.error("Submission error:", error);
       alert("Failed to submit. Please try again.");
     } finally {
       setUploading(false);
@@ -148,8 +163,12 @@ function Admingardenform() {
         <label>Filters (up to 3)</label>
         <div className={styles.FilterGroup}>
           {["Formal Garden", "Landscaping", "Other"].map((filter) => (
-            <button key={filter} type="button" onClick={() => handleFilterToggle(filter)}
-              className={form.filters.includes(filter) ? styles.Active : ""}>
+            <button
+              key={filter}
+              type="button"
+              onClick={() => handleFilterToggle(filter)}
+              className={form.filters.includes(filter) ? styles.Active : ""}
+            >
               {filter}
             </button>
           ))}
@@ -169,7 +188,13 @@ function Admingardenform() {
         <div className={styles.AvailabilityGroup}>
           {["Weekdays", "Weekends", "Flexible"].map((val) => (
             <label key={val}>
-              <input type="radio" name="availability" value={val} checked={form.availability === val} onChange={handleChange} />
+              <input
+                type="radio"
+                name="availability"
+                value={val}
+                checked={form.availability === val}
+                onChange={handleChange}
+              />
               {val}
             </label>
           ))}
@@ -181,13 +206,20 @@ function Admingardenform() {
         {imagePreview && <img src={imagePreview} alt="Preview" width="100" />}
 
         {imageError && <p>{imageError}</p>}
-        {formErrors.length > 0 && <ul>{formErrors.map((e, i) => <li key={i}>{e}</li>)}</ul>}
+        {formErrors.length > 0 && (
+          <ul>
+            {formErrors.map((e, i) => (
+              <li key={i}>{e}</li>
+            ))}
+          </ul>
+        )}
 
-        <button type="submit" disabled={uploading}>{uploading ? "Uploading..." : "Submit"}</button>
+        <button type="submit" disabled={uploading}>
+          {uploading ? "Uploading..." : "Submit"}
+        </button>
       </form>
     </div>
   );
 }
-
 
 export default Admingardenform;
