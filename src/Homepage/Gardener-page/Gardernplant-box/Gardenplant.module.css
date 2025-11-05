@@ -83,12 +83,13 @@
   
   .order {  
     width: fit-content;  
-    background-color: rgb(189, 14, 212);
+    background-color: rgb(102, 184, 58);
     color: rgb(252, 239, 239);
     border: none;
     margin-left: 1rem;
-    border-radius: .5rem;
-    padding: .3rem;
+    border-radius: 1rem;
+    
+    padding: .7rem;
     cursor: pointer;
  }
 

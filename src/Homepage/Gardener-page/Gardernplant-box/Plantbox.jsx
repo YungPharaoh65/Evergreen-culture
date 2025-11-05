@@ -3,6 +3,8 @@ import styles from './Gardenplant.module.css';
 import { Link } from "react-router-dom";  
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../Firebasedata/firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faSeedling } from "@fortawesome/free-solid-svg-icons";
 
 function Gardenerbox() {
   const [gardenForms, setGardenForms] = useState([]);
@@ -120,9 +122,10 @@ function Gardenerbox() {
                   }}
                 ></div>
 
+<br />
                 {/* Subtopic divs for filter */}
                 <div className={styles.subtopicsmove}>
-                  <div className={styles.order}>Order</div>
+                  <div className={styles.order}><FontAwesomeIcon icon={faHeart} color="#f9fffbff" className={styles.FontAwesomeIcon} /></div>
                   <div className={styles.subtopics}>
                     {gardenForm.category || 'Uncategorized'}
                   </div>

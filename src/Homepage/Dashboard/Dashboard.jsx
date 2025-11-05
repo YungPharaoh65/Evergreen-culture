@@ -26,8 +26,6 @@ function Dashboard() {
 
       <h3>Hi {userEmail}. Find your interests...</h3> {/* Display user's email */}
 
-     <Link to="/UserDetails"><button>Profile Information</button>
-     </Link>
   
 
       <CartSidebar />
