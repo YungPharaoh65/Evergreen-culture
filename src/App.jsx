@@ -12,7 +12,7 @@ import Signup from "./Forms/Signup";
 import Login from "./Forms/Login";
 import ProtectedRoute from "./Firebasedata/ProtectedRoute"; // Import your ProtectedRoute if needed
 
-import Articlepage from "./Homepage/Article/Articlepage";
+// import Articlepage from "./Homepage/Article/Articlepage";
 
 import Choosepath from "./Homepage/Choosepath";
 import Plantbox from "./Homepage/Gardener-page/Gardernplant-box/Plantbox";
@@ -93,7 +93,7 @@ function App() {
          {/*ADMIN PAGE*/} 
   
         {/*article pages*/} 
-         <Route path="/Articlepage" element={<Articlepage/>}/>
+          {/*<Route path="/Articlepage" element={<Articlepage/>}/>*/} 
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/Morearticles" element={<Morearticles/>} />
         
