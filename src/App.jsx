@@ -35,6 +35,7 @@ import Chat from "./Homepage/Chat/Chat";
 import WhatMakesAFlowerBloom from "./Homepage/Article/articlepages/WhatMakesAFlowerBloom";
 import Benefitsofgardening from "./Homepage/Article/articlepages/Benefitsofgardening";
 import Articles from "./Homepage/Article/articlepages/articles";
+import Healthbenefits from "./Homepage/Article/healthbenefits";
 
  
 function App() {
@@ -113,6 +114,8 @@ function App() {
         <Route path="/Contact" element={<Contact/>} />
 
         <Route path="/Chat" element={<Chat/>} />
+         <Route path="/Healthbenefits" element={<Healthbenefits/>} />
+
         
       </Routes>
        </NetworkWrapper>  

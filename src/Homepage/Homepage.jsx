@@ -96,7 +96,7 @@ function Homepage() {
       {/**SECOND SECTION */}{/**FIRST SECTION */}{/**FIRST SECTION */}
 
 <div className={styles.secondSection}>
-  <h1 className={styles.newHybrid}>Plant <d style={{ color:"#25D366"}}>&</d> Gardener Dashboard</h1>
+  <h1 className={styles.newHybrid}>Find <d style={{ color:"#25D366"}}>YOUR</d> Type</h1>
 
   <p className={styles.centerText}>many types of plants to research and explore... <br />
   whether you want to search for your own or want somebody to search for you. </p>

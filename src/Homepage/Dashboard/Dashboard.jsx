@@ -28,8 +28,7 @@ function Dashboard() {
 
   
 
-      <CartSidebar />
-
+      
 
 
       <div className={styles.Centerbar}>
