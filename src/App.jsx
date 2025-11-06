@@ -12,6 +12,8 @@ import Signup from "./Forms/Signup";
 import Login from "./Forms/Login";
 import ProtectedRoute from "./Firebasedata/ProtectedRoute"; // Import your ProtectedRoute if needed
 
+import Articlepage from "./Homepage/Article/Articlepage";
+
 import Choosepath from "./Homepage/Choosepath";
 import Plantbox from "./Homepage/Gardener-page/Gardernplant-box/Plantbox";
 import Gardenerbox from "./Homepage/Gardener-page/Gardernplant-box/Gardenerbox";
@@ -27,9 +29,9 @@ import Errorpage from "./Errors/Errorpage";
 import NetworkWrapper from "./Errors/NetworkWrapper";
 import Morearticles from "./Homepage/Article/Morearticles";
 import AdminLogin from "./Homepage/Admin-page/adminLogin";
-import ArticlePage from "./Homepage/Article/Articlepage";
 import Contact from "./Homepage/Article/Contact";
 import Chat from "./Homepage/Chat/Chat";
+
  
 function App() {
   return (
@@ -90,8 +92,8 @@ function App() {
         <Route path="/Adminplantform" element={<Adminplantform />} />
          {/*ADMIN PAGE*/} 
   
-        {/*article pages*/}
-         <Route path="/Articlepage" element={<ArticlePage/>} />
+        {/*article pages*/} {/* <Route path="/Articlepage" element={<ArticlePage/>} />*/}
+         <Route path="/Articlepage" element={<Articlepage/>} />
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/Morearticles" element={<Morearticles/>} />
         
