@@ -249,3 +249,9 @@ img.imgbox2 {
 .FontAwesomeIcon{
   font-size: 1.5rem; 
 }
+
+.messageBox {
+  width: 3rem;
+  height: 2rem;
+  text-align: center;
+}

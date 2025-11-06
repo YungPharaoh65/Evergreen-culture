@@ -82,7 +82,7 @@ function Homepage() {
                 
           <button
             className={styles.homeButton}
-            onClick={() => navigate('/Choosepath')}
+            onClick={() => navigate('/Signup')}
           >
             Get Started with us
           </button>

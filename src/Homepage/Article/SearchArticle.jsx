@@ -93,11 +93,22 @@ function SearchArticle() {
 {/* BOTTOM TEXT & SOCIALS */}
           <div className={styles.secondSection2}>
             <div className={styles.logoheader}>
-            have a suggestion? please add yours below<FontAwesomeIcon icon={faSeedling} color="#25D366" className={styles.FontAwesomeIcon} />
+            have a suggestion? please add yours below <FontAwesomeIcon icon={faSeedling} color="#25D366" className={styles.FontAwesomeIcon} />
             </div>
           </div>
 
-          <div className={styles.secondSection2}><input type="text" style={{ marginBottom: "2rem", textAlign: "center" }} /></div>
+          <div className={styles.secondSection2}>
+  <textarea
+    placeholder="Type your message here..."
+    rows="5"
+    style={{
+      width: "25rem",
+      textAlign: "center",
+      borderRadius: "8px",
+       resize: "none", // prevents resizing if you want fixed size
+    }}
+  ></textarea>
+</div>
 
 <div className={styles.secondSection2}><button style={{ marginBottom: "2rem", textAlign: "center" }} >Submit</button></div>
 
