@@ -92,8 +92,8 @@ function App() {
         <Route path="/Adminplantform" element={<Adminplantform />} />
          {/*ADMIN PAGE*/} 
   
-        {/*article pages*/} {/* <Route path="/Articlepage" element={<ArticlePage/>} />*/}
-         <Route path="/Articlepage" element={<Articlepage/>} />
+        {/*article pages*/} 
+         <Route path="/Articlepage" element={<Articlepage/>}/>
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/Morearticles" element={<Morearticles/>} />
         

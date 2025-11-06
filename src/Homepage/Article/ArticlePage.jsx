@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./ArticlePage.module.css";
+import styles from "./Articlepage.module.css";
 
 function Articlepage() {
   return (
