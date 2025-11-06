@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "./plantDIY.module.css";
+import styles from "./PlantDIY.module.css";
+
 import { Link } from "react-router-dom";
  
 function PlantDIY() {
