@@ -19,6 +19,7 @@ function Morearticles() {
      <h1>More <d style={{ color:"#25D366"}}>Articles</d> & <d style={{ color:"#25D366"}}>tips </d> to explore </h1>
      
      <SearchArticle/>
+     
 
     </>
   );

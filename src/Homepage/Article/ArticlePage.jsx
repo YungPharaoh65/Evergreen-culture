@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./articlePage.module.css";
+import styles from "./ArticlePage.module.css";
 
-function articlePage() {
+function Articlepage() {
   return (
     <div className={styles.pageWrapper}>
       {/* Close Button */}
@@ -82,4 +82,4 @@ function articlePage() {
   );
 }
 
-export default articlePage;
+export default Articlepage;
