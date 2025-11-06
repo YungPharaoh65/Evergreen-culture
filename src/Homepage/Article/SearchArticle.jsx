@@ -1,6 +1,8 @@
 import React from "react"; 
 import { Link } from "react-router-dom";
 import styles from "./SearchArticle.module.css";
+import Benefitsofgardening from "../Article/articlepages/Benefitsofgardening";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
@@ -18,16 +20,16 @@ function SearchArticle() {
  
 <div className={styles.centerimgbox2}>
 
-<Link to="/Articlepage">
+<Link to="/WhatMakesAFlowerBloom">
 <button>What makes a flower bloom</button> 
 </Link>
-<Link to="/Articlepage">
+<Link to="/Articles">
 <button>DIY: How to make your own garden</button> 
 </Link>
-<Link to="/Articlepage">
+<Link to="/Benefitsofgardening">
 <button>Benefits of gardening</button> 
 </Link>
-<Link to="/Articlepage">
+<Link to="/Healthbenefits">
 <button>Health Benefits: why gardening will suit you</button> 
 </Link>
  

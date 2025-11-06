@@ -9,7 +9,6 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import Chat from './Chat/Chat';
 
-
 {/*ADD A CHATBOT GUIDE TO HELP NAVIGATE AS WELL */}
 
 const images = [
@@ -127,9 +126,23 @@ function Homepage() {
       Join us to explore more</p>
       <br />
       <div className={styles.centerimgbox3}>
-<button className={styles.customizeBtn}>Recent activity</button>
-<button className={styles.customizeBtn}>Planting trees</button>
-<button className={styles.customizeBtn}>indigenous types</button>
+<button className={styles.customizeBtn}style={{
+                color: "black",
+                border: "1px solid black"
+              }}>Recent activity</button>
+              
+<button className={styles.customizeBtn}style={{
+                color: "black",
+                border: "1px solid black"
+              }}
+>Planting trees</button>
+
+<button className={styles.customizeBtn}
+style={{
+                color: "black",
+                hover: "white",
+                border: "1px solid black"
+              }}>indigenous types</button>
 </div>
 
 <br /> 

@@ -128,6 +128,7 @@ function About() {
                 borderRadius: "8px",
                 backgroundColor: "inherit",
                 marginBottom: "1.5rem",
+                color: "black",
                 border: "1px solid black"
               }}
             >

@@ -2,7 +2,7 @@
 .navbar {
   padding: 35px 20px;
   background-color: transparent;
-  color: #fff;
+  color: #978585;
   display: flex;
   justify-content: center;
   border-radius: .5rem;
@@ -38,7 +38,7 @@
   border-radius: 50%;
   margin-left: 11rem;
   margin-top: -1rem;
-  border: 1px solid gray;
+  border: transparent;
   background-color: inherit;
   cursor: pointer;
   position: fixed; /* Makes the toggle button fixed */

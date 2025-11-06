@@ -31,6 +31,9 @@ import Morearticles from "./Homepage/Article/Morearticles";
 import AdminLogin from "./Homepage/Admin-page/adminLogin";
 import Contact from "./Homepage/Article/Contact";
 import Chat from "./Homepage/Chat/Chat";
+import Articles from "./Homepage/Article/articlepages/articles";
+import WhatMakesAFlowerBloom from "./Homepage/Article/articlepages/WhatMakesAFlowerBloom";
+import Benefitsofgardening from "./Homepage/Article/articlepages/Benefitsofgardening";
 
  
 function App() {
@@ -80,6 +83,11 @@ function App() {
          <Route path="/Gardendetails/:id" element={<Gardendetails />} />
          <Route path="/Plantdetails/:id" element={<Plantdetails />} /> 
 
+         <Route path="/WhatMakesAFlowerBloom" element={<WhatMakesAFlowerBloom />} /> 
+         <Route path="/Benefitsofgardening" element={<Benefitsofgardening />} /> 
+
+
+
          <Route path="/Plantbox" element={<Plantbox />} />
         <Route path="/Gardenbox" element={<Gardenerbox />} />
         <Route path="/Gardendetails" element={<Gardendetails />} />
@@ -96,6 +104,7 @@ function App() {
           {/*<Route path="/Articlepage" element={<Articlepage/>}/>*/} 
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/Morearticles" element={<Morearticles/>} />
+        <Route path="/Articles" element={<Articles/>} />
         
         <Route path="/SearchArticle" element={<SearchArticle/>} />
         {/*article pages*/}

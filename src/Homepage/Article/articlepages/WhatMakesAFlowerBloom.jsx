@@ -1,0 +1,112 @@
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./WhatMakesAFlowerBloom.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faSeedling } from "@fortawesome/free-solid-svg-icons";
+
+function WhatMakesAFlowerBloom() {
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      {/* HEADER SECTION */}
+
+            
+      <div className={styles.secondSection}>
+        <Link to="/Morearticles"><button>x</button></Link>
+        
+        <h1 className={styles.newHybrid}>What Makes a Flower Bloom 🌸</h1>
+
+        <p className={styles.centerText}>
+          Discover the science and beauty behind how flowers come to life.
+          Learn what triggers a flower to bloom and how you can nurture
+          your own plants to do the same.
+        </p>
+      </div>
+
+      {/* MAIN ARTICLE CONTENT */}
+      <div className={styles.centerimgbox2}>
+        <div className={styles.imgbox3}>
+          <div className={styles.imgbox3Text}>
+            <h3>The Blooming Process</h3>
+            <p>
+              A flower blooms through a series of stages triggered by temperature,
+              light exposure, and water levels. Inside the plant, hormones called
+              <b> florigen </b> signal that it's time to produce buds and open petals.
+            </p>
+            <p>
+              This process is nature’s way of allowing the plant to reproduce
+              — attracting pollinators like bees, butterflies, and hummingbirds.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ADDITIONAL SECTIONS */}
+      <div className={styles.centerimgbox2}>
+        <div className={styles.imgbox3}>
+          <div className={styles.imgbox3Text}>
+            <h3>How You Can Encourage Blooms</h3>
+            <p>
+              Ensure your plant gets enough sunlight, maintain healthy soil,
+              and water regularly. Seasonal timing is key — some plants bloom
+              only in spring, while others in summer.
+            </p>
+            <p>
+              You can also use natural fertilizers to help nutrients reach the roots,
+              promoting stronger and longer-lasting blooms 🌼.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* CALL TO ACTION SECTION */}
+      <div className={styles.secondSection2}>
+        <div className={styles.logoheader}>
+          Have thoughts or tips about blooming plants? Share below{" "}
+          <FontAwesomeIcon icon={faSeedling} color="#25D366" className={styles.FontAwesomeIcon} />
+        </div>
+      </div>
+
+      <div className={styles.secondSection2}>
+        <textarea
+          placeholder="Type your message here..."
+          rows="5"
+          style={{
+            width: "25rem",
+            textAlign: "center",
+            borderRadius: "8px",
+            resize: "none",
+          }}
+        ></textarea>
+      </div>
+
+      <div className={styles.secondSection2}>
+        <button style={{ marginBottom: "2rem", textAlign: "center" }}>Submit</button>
+      </div>
+
+      {/* NAVIGATION + SOCIALS */}
+      <div className={styles.secondSection2}>
+        <p className={styles.text}>
+          ( click the word{" "}
+          <b
+            onClick={() => navigate("/Choosepath")}
+            style={{ color: "#2c7446ff", cursor: "pointer" }}
+          >
+            dashboard
+          </b>{" "}
+          to see your options )
+        </p>
+      </div>
+
+      <div className={styles.secondSection2}>
+        <FontAwesomeIcon icon={faWhatsapp} color="#25D366" className={styles.FontAwesomeIcon} />
+        <FontAwesomeIcon icon={faInstagram} color="#E1306C" className={styles.FontAwesomeIcon} />
+        <FontAwesomeIcon icon={faTwitter} color="#1DA1F2" className={styles.FontAwesomeIcon} />
+      </div>
+    </div>
+  );
+}
+
+export default WhatMakesAFlowerBloom;
