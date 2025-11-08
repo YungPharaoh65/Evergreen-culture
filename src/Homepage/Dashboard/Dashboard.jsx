@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./Dashboard.module.css";
 import Plantbox from "../Gardener-page/Gardernplant-box/Plantbox";
 import Gardenerbox from "../Gardener-page/Gardernplant-box/Gardenerbox";
-import CartSidebar from "../Gardener-page/Gardernplant-box/Cartpage";
 
 function Dashboard() {
   const [showPlant, setShowPlant] = useState(true);

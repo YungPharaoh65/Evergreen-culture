@@ -3,14 +3,26 @@
  subheadings - buttons
  */ 
 
-.border, .border2{
+.border .border2{
     width: 20rem;
     height:20rem; 
-    background-color: rgb(86, 112, 112);
+    background-color: rgb(17, 42, 42);
     border-radius: 1rem;
 border: none;
 
-margin-top: 5rem; 
+margin-top: 2rem;
+margin-bottom: 5rem; 
+}
+
+.border2{
+    width: 20rem;
+    height:20rem; 
+    background-color: rgb(17, 42, 42);
+    border-radius: 1rem;
+border: none;
+
+margin-top: -2rem;
+margin-bottom: 5rem; 
 }
 
 .body{

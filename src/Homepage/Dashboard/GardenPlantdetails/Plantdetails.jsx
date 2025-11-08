@@ -1,43 +1,42 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "./Gardenplantdetails.module.css";
-import CartSidebar from "../../Gardener-page/Gardernplant-box/Cartpage";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Firebasedata/firebase";
 
 function Plantdetails() {
-  const { id } = useParams(); // Extract ID from route
+  const { id } = useParams();
   const [plantData, setPlantData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showHowToPlant, setShowHowToPlant] = useState(false);
 
-  const howToPlantRef = useRef(null); // For smooth scrolling
-
-  // Array of plant-related emojis
   const plantEmojis = ["🌱", "🍃", "🌿", "🌾", "🌻", "🍂", "🌺", "🌼"];
+  const getRandomEmoji = () => plantEmojis[Math.floor(Math.random() * plantEmojis.length)];
 
-  // Function to get a random plant emoji
-  const getRandomEmoji = () => {
-    const randomIndex = Math.floor(Math.random() * plantEmojis.length);
-    return plantEmojis[randomIndex];
-  };
-
+  // Fetch plant data from Firestore
   useEffect(() => {
     const fetchPlant = async () => {
       try {
         const docRef = doc(db, "gardenForms", id);
         const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          setPlantData(docSnap.data());
-        } else {
+        if (!docSnap.exists()) {
           setError("No plant found");
+          setLoading(false);
+          return;
         }
-        setLoading(false);
+
+        const data = docSnap.data();
+        // Convert howToPlant string to array if needed
+        if (data.howToPlant && typeof data.howToPlant === "string") {
+          data.howToPlant = data.howToPlant.split("\n").filter(line => line.trim() !== "");
+        }
+
+        setPlantData(data);
       } catch (err) {
         console.error("Error fetching plant:", err);
         setError("Failed to load plant data");
+      } finally {
         setLoading(false);
       }
     };
@@ -47,124 +46,90 @@ function Plantdetails() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (!plantData) return null;
 
   return (
     <div className={styles.body}>
-      <CartSidebar />
-
-      {/* Exit Button */}
       <Link to="/Dashboard">
         <button className="exitButton">x</button>
       </Link>
 
-      <div className={styles.border}></div>
-
-      <div className={styles.border2}>
-        <div className={styles.subtopicsmove}>
-          <h2>{plantData.name || "No Name"}</h2>
-           </div>
-
-        <div className={styles.subtopicsmove}>
-          {/* Category button with random plant emoji */}
-          <button className={styles.subheadings2}>
-            {getRandomEmoji()} Category: {plantData.category || "Unknown Category"}
-          </button>
-             </div>
-
-             <h3>About {plantData.name}</h3>
- 
-
-{plantData.about && (
-  <div>
-      <p className={styles.paragraph}>{plantData.about}</p>
-  </div>
-)}
-
-<br />
-
-        <button className={styles.cartbutton}>add to cart</button>
-
-        {/* Toggle Dropdown */}
-        <button
-          className={styles.reviewDropdown}
-          onClick={() => setShowHowToPlant((prev) => !prev)}
-        >
-          how to plant
-        </button>
-      </div>
-
-      <br />
-      <br />
-      <div className={styles.subtopicsmove}>
-        <button className={styles.subheadings2}>🌞 {plantData.season || "Summer"} :Weather</button>
-        <button className={styles.subheadings2}>{plantData.type || "Invasive / Friendly"}</button>
-        <button className={styles.subheadings2}>{plantData.location || "Indoor Gardens"}</button>
-      </div>
-
-      {/* Dropdown Section */}
+      {/* Plant Image */}
       <div
-        className={`${styles.dropdownWrapper} ${showHowToPlant ? styles.open : styles.closed}`}
-        ref={howToPlantRef}
+        className={styles.image}
+        style={{
+          backgroundImage: plantData.imageURL ? `url(${plantData.imageURL})` : "none",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          width: "20rem",
+          height: "20rem",
+          borderRadius: "1rem",
+          marginTop: "5rem",
+          border: plantData.imageURL ? "none" : "1px solid #ccc",
+        }}
       >
-        <div className={styles.positionContent}>
-          <h2>take care of {plantData.name}</h2>
-          <br />
-          <div className={styles.centerboxes}>
-            <div className={styles.box1}>
-              <h2>Water</h2>
-              <p className={styles.text}>{plantData.water || "once every 2 days"}</p>
-            </div>
-            <div className={styles.box1}>
-              <h2>Placement</h2>
-              <p className={styles.text}>{plantData.placement || "less than 6ft from window"}</p>
-            </div>
-            <div className={styles.box1}>
-              <h2>Nutrients</h2>
-              <p className={styles.text}>{plantData.nutrients || "Repot after 2x growth"}</p>
-            </div>
+        {!plantData.imageURL && <p style={{ padding: "1rem" }}>Image not available</p>}
+      </div>
+
+      {/* Plant Details */}
+      <div className={styles.border2}>
+        <h2>{plantData.name || "No Name"}</h2>
+        <button className={styles.subheadings2}>
+          {getRandomEmoji()} Category:{" "}
+          {Array.isArray(plantData.category) ? plantData.category.join(", ") : plantData.category || "Unknown"}
+        </button>
+
+        <h3>About {plantData.name}</h3>
+
+        <p className={styles.paragraph}>{plantData.about || "No description available"}</p>
+<br /><br /><br /><br />
+        {/* Subtopics */}
+        <div className={styles.subtopicsmove}>
+          <button className={styles.subheadings2}>🌞 {plantData.weather || "Summer"}</button>
+          <button className={styles.subheadings2}>
+            {Array.isArray(plantData.kind) ? plantData.kind.join(", ") : plantData.kind || "Invasive / Friendly"}
+          </button>
+          <button className={styles.subheadings2}>{plantData.location || "Indoor / Outdoor"}</button>
+        </div>
+
+        
+      </div>
+
+      {/* How to Plant Section */}
+        <h2>Take care of {plantData.name}</h2>
+        <div className={styles.centerboxes}>
+          <div className={styles.box1}>
+            <h3>Water</h3>
+            <p>{plantData.water || "once every 2 days"}</p>
           </div>
-
-          <div className={styles.centerboxes}>
-            <button
-              className={styles.reviewDropdown}
-              onClick={() => {
-                setShowHowToPlant(false);
-                setTimeout(() => {
-                  howToPlantRef.current?.scrollIntoView({ behavior: "smooth" });
-                }, 100);
-              }}
-            >
-              Close section
-            </button>
+          <div className={styles.box1}>
+            <h3>Placement</h3>
+            <p>{plantData.placement || "less than 6ft from window"}</p>
           </div>
-
-          <div className={styles.centerboxes}>
-            <div className={styles.box2}>
-              <h2>How to plant: <br /> {plantData.name}</h2>
-              <br />
-              {plantData.plantingInstructions ? (
-                plantData.plantingInstructions.split('\n').map((step, index) => (
-                  <p className={styles.text} key={index}>
-                    {index + 1}.) {step}
-                  </p>
-                ))
-              ) : plantData.howToPlant ? (
-                plantData.howToPlant.split('\n').map((step, index) => (
-                  <p className={styles.text} key={index}>
-                    {index + 1}.) {step}
-                  </p>
-                ))
-              ) : null}
-
-              <br /><br /><br /><br /><br />
-              <h3>Did you know: </h3>
-              <p className={styles.text}>
-                {plantData.fact || "This plant improves indoor air quality!"}
-              </p>
-            </div>
+          <div className={styles.box1}>
+            <h3>Nutrients</h3>
+            <p>{plantData.nutrients || "Repot after 2x growth"}</p>
           </div>
         </div>
-      </div>
+
+        <div className={styles.centerboxes}>
+          <div className={styles.box2}>
+            <h2>How to Plant: {plantData.name}</h2>
+            {plantData.howToPlant && plantData.howToPlant.length > 0 ? (
+              <ol>
+                {plantData.howToPlant.map((step, idx) => (
+                  <li key={idx}>{step}</li>
+                ))}
+              </ol>
+            ) : (
+              <p>Instructions not available.</p>
+            )}
+
+            <h3>Did you know:</h3>
+            <p>{plantData.fact || "This plant improves indoor air quality!"}</p>
+          </div>
+        </div>
+
     </div>
   );
 }
