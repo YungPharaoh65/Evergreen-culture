@@ -35,16 +35,16 @@ function SearchArticle() {
       <div className={styles.secondSection}>
         <h1 className={styles.newHybrid}>Most Popular Right Now...</h1>
         <div className={styles.centerimgbox2}>
-          <Link to="/Whamakesaflowbloom">
+          <Link to="/Morearticles">
             <button>What makes a flower bloom</button> 
           </Link>
-          <Link to="/Benefitsofgardening">
+          <Link to="/Morearticles">
             <button>DIY: How to make your own garden</button> 
           </Link>
-          <Link to="/Benefitsofgardening">
+          <Link to="/Morearticles">
             <button>Benefits of gardening</button> 
           </Link>
-          <Link to="/Healthbenefits">
+          <Link to="/Morearticles">
             <button>Health Benefits: why gardening will suit you</button> 
           </Link>
         </div>

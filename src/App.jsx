@@ -31,10 +31,6 @@ import AdminLogin from "./Homepage/Admin-page/adminLogin";
 import Contact from "./Homepage/Article/Contact";
 
 import Chat from "./Homepage/Chat/Chat";
-
-import Whamakesaflowbloom from "./Homepage/Article/Articlepages/Whamakesaflowbloom";
-import Benefitsofgardening from "./Homepage/Article/Articlepages/Benefitsofgardening";
-import Healthbenefits from "./Homepage/Article/healthbenefits";
 import Articledetails from "./Homepage/Article/Articledetails";
 
  
@@ -85,9 +81,7 @@ function App() {
          <Route path="/Gardendetails/:id" element={<Gardendetails />} />
          <Route path="/Plantdetails/:id" element={<Plantdetails />} /> 
 
-         <Route path="/Whamakesaflowbloom" element={<Whamakesaflowbloom />} /> 
-         <Route path="/Benefitsofgardening" element={<Benefitsofgardening />} /> 
-
+      
 
 
          <Route path="/Plantbox" element={<Plantbox />} />
@@ -115,8 +109,7 @@ function App() {
         <Route path="/Contact" element={<Contact/>} />
 
         <Route path="/Chat" element={<Chat/>} />
-         <Route path="/Healthbenefits" element={<Healthbenefits/>} />
-
+        
         
       </Routes>
        </NetworkWrapper>  
