@@ -82,27 +82,14 @@ function Benefitsofgardening() {
       {/* CALL TO ACTION */}
       <div className={styles.secondSection2}>
         <div className={styles.logoheader}>
-          What’s your favorite thing about gardening? Share your thoughts below{" "}
+          What’s your favorite thing about gardening? Share your thoughts {" "}
           <FontAwesomeIcon icon={faLeaf} color="#2c7446" className={styles.FontAwesomeIcon} />
         </div>
       </div>
 
-      <div className={styles.secondSection2}>
-        <textarea
-          placeholder="Type your message here..."
-          rows="5"
-          style={{
-            width: "25rem",
-            textAlign: "center",
-            borderRadius: "8px",
-            resize: "none",
-          }}
-        ></textarea>
-      </div>
+      
 
-      <div className={styles.secondSection2}>
-        <button style={{ marginBottom: "2rem", textAlign: "center" }}>Submit</button>
-      </div>
+      
 
       {/* NAVIGATION + SOCIALS */}
       <div className={styles.secondSection2}>
@@ -112,7 +99,7 @@ function Benefitsofgardening() {
             onClick={() => navigate("/Choosepath")}
             style={{ color: "#2c7446ff", cursor: "pointer" }}
           >
-            dashboard
+            articles
           </b>{" "}
           to see your options )
         </p>

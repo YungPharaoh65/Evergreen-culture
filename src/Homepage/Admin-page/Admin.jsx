@@ -161,7 +161,7 @@ function AdminPage() {
       case "gardeners":
         return <Admingardenform />;
       case "community":
-        return <div>Community Topics Table Here</div>;
+        return <div>Chat table</div>;
       default:
         return (
           <div className={styles.HomeSection}>
@@ -356,7 +356,7 @@ function AdminPage() {
         <button onClick={() => setActiveView("home")}>Home</button>
         <button onClick={() => setActiveView("plants")}>Plants</button>
         <button onClick={() => setActiveView("gardeners")}>Gardeners</button>
-        <button onClick={() => setActiveView("community")}>Community</button>
+        <button onClick={() => setActiveView("community")}>Chat</button>
       </nav>
 
       <div className={styles.adminContent}>

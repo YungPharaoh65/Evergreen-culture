@@ -29,7 +29,7 @@ function Landingpage() {
 
   <div className={styles.secondSection}>
     <Link to="/homepage">
-      <button className={styles.startBtn}>Let's explore here</button>
+      <button className={styles.startBtn}>Let's explore </button>
     </Link>
   </div> 
  

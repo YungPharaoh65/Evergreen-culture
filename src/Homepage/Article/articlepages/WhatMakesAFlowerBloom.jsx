@@ -61,40 +61,16 @@ function WhatMakesAFlowerBloom() {
         </div>
       </div>
 
-      {/* CALL TO ACTION SECTION */}
-      <div className={styles.secondSection2}>
-        <div className={styles.logoheader}>
-          Have thoughts or tips about blooming plants? Share below{" "}
-          <FontAwesomeIcon icon={faSeedling} color="#25D366" className={styles.FontAwesomeIcon} />
-        </div>
-      </div>
-
-      <div className={styles.secondSection2}>
-        <textarea
-          placeholder="Type your message here..."
-          rows="5"
-          style={{
-            width: "25rem",
-            textAlign: "center",
-            borderRadius: "8px",
-            resize: "none",
-          }}
-        ></textarea>
-      </div>
-
-      <div className={styles.secondSection2}>
-        <button style={{ marginBottom: "2rem", textAlign: "center" }}>Submit</button>
-      </div>
 
       {/* NAVIGATION + SOCIALS */}
       <div className={styles.secondSection2}>
         <p className={styles.text}>
           ( click the word{" "}
           <b
-            onClick={() => navigate("/Choosepath")}
+            onClick={() => navigate("/Morearticles")}
             style={{ color: "#2c7446ff", cursor: "pointer" }}
           >
-            dashboard
+            article
           </b>{" "}
           to see your options )
         </p>
