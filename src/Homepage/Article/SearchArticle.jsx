@@ -38,7 +38,7 @@ function SearchArticle() {
           <Link to="/WhatMakesAFlowerBloom">
             <button>What makes a flower bloom</button> 
           </Link>
-          <Link to="/Articles">
+          <Link to="/Benefitsofgardening">
             <button>DIY: How to make your own garden</button> 
           </Link>
           <Link to="/Benefitsofgardening">

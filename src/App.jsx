@@ -29,7 +29,7 @@ import NetworkWrapper from "./Errors/NetworkWrapper";
 import Morearticles from "./Homepage/Article/Morearticles";
 import AdminLogin from "./Homepage/Admin-page/adminLogin";
 import Contact from "./Homepage/Article/Contact";
-import Articles from "./Homepage/Article/Articlepages/Articles";
+
 import Chat from "./Homepage/Chat/Chat";
 
 import WhatMakesAFlowerBloom from "./Homepage/Article/Articlepages/WhatMakesAFlowerBloom";
@@ -104,10 +104,10 @@ function App() {
   
         {/*article pages*/} 
         <Route path="/Articlepage" element={<Articledetails/>}/>
-         <Route path="/Articles" element={<Articles/>}/>
+         
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/Morearticles" element={<Morearticles/>} />
-        <Route path="/Articles" element={<Articles/>} />
+        <Route path="/Articledetails" element={<Articledetails/>} />
         
         <Route path="/SearchArticle" element={<SearchArticle/>} />
         {/*article pages*/}
