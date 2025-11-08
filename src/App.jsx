@@ -12,7 +12,6 @@ import Signup from "./Forms/Signup";
 import Login from "./Forms/Login";
 import ProtectedRoute from "./Firebasedata/ProtectedRoute"; // Import your ProtectedRoute if needed
 
-import Articlepage from "./Homepage/Article/Articlepage";
 
 import Choosepath from "./Homepage/Choosepath";
 import Plantbox from "./Homepage/Gardener-page/Gardernplant-box/Plantbox";
@@ -30,12 +29,13 @@ import NetworkWrapper from "./Errors/NetworkWrapper";
 import Morearticles from "./Homepage/Article/Morearticles";
 import AdminLogin from "./Homepage/Admin-page/adminLogin";
 import Contact from "./Homepage/Article/Contact";
+import Articles from "./Homepage/Article/Articlepages/Articles";
 import Chat from "./Homepage/Chat/Chat";
 
 import WhatMakesAFlowerBloom from "./Homepage/Article/Articlepages/WhatMakesAFlowerBloom";
 import Benefitsofgardening from "./Homepage/Article/Articlepages/Benefitsofgardening";
-import Articles from "./Homepage/Article/Articlepages/articles";
 import Healthbenefits from "./Homepage/Article/healthbenefits";
+import Articledetails from "./Homepage/Article/Articledetails";
 
  
 function App() {
@@ -103,7 +103,8 @@ function App() {
          {/*ADMIN PAGE*/} 
   
         {/*article pages*/} 
-        <Route path="/Articlepage" element={<Articlepage/>}/>
+        <Route path="/Articlepage" element={<Articledetails/>}/>
+         <Route path="/Articles" element={<Articles/>}/>
         <Route path="/plantDIY" element={<PlantDIY/>} />
         <Route path="/Morearticles" element={<Morearticles/>} />
         <Route path="/Articles" element={<Articles/>} />
