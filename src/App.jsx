@@ -32,7 +32,7 @@ import Contact from "./Homepage/Article/Contact";
 
 import Chat from "./Homepage/Chat/Chat";
 
-import WhatMakesAFlowerBloom from "./Homepage/Article/Articlepages/WhatMakesAFlowerBloom";
+import Whamakesaflowbloom from "./Homepage/Article/Articlepages/Whamakesaflowbloom";
 import Benefitsofgardening from "./Homepage/Article/Articlepages/Benefitsofgardening";
 import Healthbenefits from "./Homepage/Article/healthbenefits";
 import Articledetails from "./Homepage/Article/Articledetails";
@@ -85,7 +85,7 @@ function App() {
          <Route path="/Gardendetails/:id" element={<Gardendetails />} />
          <Route path="/Plantdetails/:id" element={<Plantdetails />} /> 
 
-         <Route path="/WhatMakesAFlowerBloom" element={<WhatMakesAFlowerBloom />} /> 
+         <Route path="/Whamakesaflowbloom" element={<Whamakesaflowbloom />} /> 
          <Route path="/Benefitsofgardening" element={<Benefitsofgardening />} /> 
 
 

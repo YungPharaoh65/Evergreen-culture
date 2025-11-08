@@ -35,7 +35,7 @@ function SearchArticle() {
       <div className={styles.secondSection}>
         <h1 className={styles.newHybrid}>Most Popular Right Now...</h1>
         <div className={styles.centerimgbox2}>
-          <Link to="/WhatMakesAFlowerBloom">
+          <Link to="/Whamakesaflowbloom">
             <button>What makes a flower bloom</button> 
           </Link>
           <Link to="/Benefitsofgardening">

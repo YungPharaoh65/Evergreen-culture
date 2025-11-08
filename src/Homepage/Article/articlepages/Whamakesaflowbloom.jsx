@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 
-function WhatMakesAFlowerBloom() {
+function Whamakesaflowbloom() {
   const navigate = useNavigate();
 
   return (
@@ -85,4 +85,4 @@ function WhatMakesAFlowerBloom() {
   );
 }
 
-export default WhatMakesAFlowerBloom;
+export default Whamakesaflowbloom;
