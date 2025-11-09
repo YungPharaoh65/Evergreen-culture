@@ -8,6 +8,7 @@ import { faWhatsapp, faInstagram, faTwitter } from "@fortawesome/free-brands-svg
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import Createdemo from "../../Forms/createdemo";
 
 function SearchArticle() {
   const navigate = useNavigate();
@@ -35,23 +36,25 @@ function SearchArticle() {
       <div className={styles.secondSection}>
         <h1 className={styles.newHybrid}>Most Popular Right Now...</h1>
         <div className={styles.centerimgbox2}>
-          <Link to="/Morearticles">
-            <button>What makes a flower bloom</button> 
+          <Link to="/Morearticles" >
+            <button className={styles.homeButton}>What makes a flower bloom</button> 
           </Link>
           <Link to="/Morearticles">
-            <button>DIY: How to make your own garden</button> 
+            <button className={styles.homeButton}>DIY: How to make your own garden</button> 
           </Link>
           <Link to="/Morearticles">
-            <button>Benefits of gardening</button> 
+            <button className={styles.homeButton}>Benefits of gardening</button> 
           </Link>
           <Link to="/Morearticles">
-            <button>Health Benefits: why gardening will suit you</button> 
+            <button className={styles.homeButton}>Health Benefits: why gardening will suit you</button> 
           </Link>
         </div>
       </div>
 
       {/* Recent Articles Section */}
-      <h1>Recent Articles</h1>
+      <h1 style={{
+                      color: "#2c7446ff"
+                    }}>Recent Articles</h1>
       <div className={styles.centerimgbox2}>
         {[1, 2, 3].map((item) => (
           <div key={item} className={styles.centerimgbox2}>
@@ -69,6 +72,9 @@ function SearchArticle() {
           </div>
         ))}
       </div>
+
+       <Createdemo/>
+       <br /><br />
 
       {/* Feedback Section */}
       <div className={styles.secondSection2}>
@@ -95,7 +101,7 @@ function SearchArticle() {
 
       <div className={styles.secondSection2}>
         <button
-          style={{ marginBottom: "2rem", textAlign: "center" }}
+          className={styles.homeButton}
           onClick={handleSubmit}
         >
           Submit
@@ -128,6 +134,8 @@ function SearchArticle() {
         <FontAwesomeIcon icon={faInstagram} color="#E1306C" className={styles.FontAwesomeIcon} />
         <FontAwesomeIcon icon={faTwitter} color="#1DA1F2" className={styles.FontAwesomeIcon} />
       </div>
+
+      
     </div>
   );
 }

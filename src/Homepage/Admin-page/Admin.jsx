@@ -1,4 +1,3 @@
-
 import Admingardenform from "../../Forms/Admingardenform";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -7,7 +6,6 @@ import Adminplantforms from "../../Forms/Adminplantforms";
 import { getDocs, collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
 import styles from "./Admin.module.css";
 import Adminforms from "../../Forms/Adminplantforms";
-
 
 function AdminPage() {
   const [activeView, setActiveView] = useState("home");
@@ -49,18 +47,26 @@ function AdminPage() {
 
   // Realtime updates for Community Topics
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "communityTopics"), snapshot => {
-      setCommunityTopics(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    }, error => console.error("Error fetching community topics:", error));
+    const unsubscribe = onSnapshot(
+      collection(db, "communityTopics"),
+      snapshot => {
+        setCommunityTopics(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      },
+      error => console.error("Error fetching community topics:", error)
+    );
 
     return () => unsubscribe();
   }, []);
 
   // Realtime updates for Chatbot Feedback
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, "chatbotFeedbacks"), snapshot => {
-      setChatbotFeedbacks(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    }, error => console.error("Error fetching chatbot feedbacks:", error));
+    const unsubscribe = onSnapshot(
+      collection(db, "chatbotFeedbacks"),
+      snapshot => {
+        setChatbotFeedbacks(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      },
+      error => console.error("Error fetching chatbot feedbacks:", error)
+    );
 
     return () => unsubscribe();
   }, []);
@@ -200,7 +206,7 @@ function AdminPage() {
                           <td>{g.fullName || "N/A"}</td>
                           <td>{g.preferredLocation || "N/A"}</td>
                           <td>{g.idNumber || "N/A"}</td>
-                          <td>{g.filters?.join(", ") || "N/A"}</td>
+                          <td>{Array.isArray(g.filters) ? g.filters.join(", ") : g.filters || "N/A"}</td>
                           <td>{g.customFilter || "N/A"}</td>
                           <td>{g.aboutMe || "No details"}</td>
                           <td>{g.availability || "Not specified"}</td>
@@ -238,13 +244,13 @@ function AdminPage() {
                           <td>{f.name || "N/A"}</td>
                           <td>{f.about || "N/A"}</td>
                           <td>{f.weather || "N/A"}</td>
-                          <td>{f.kind?.join(", ") || "N/A"}</td>
+                          <td>{Array.isArray(f.kind) ? f.kind.join(", ") : f.kind || "N/A"}</td>
                           <td>{f.location || "N/A"}</td>
                           <td>{f.water || "N/A"}</td>
                           <td>{f.placement || "N/A"}</td>
                           <td>{f.nutrients || "N/A"}</td>
-                          <td>{f.howToPlant || "N/A"}</td>
-                          <td>{f.category?.join(", ") || "N/A"}</td>
+                          <td>{Array.isArray(f.howToPlant) ? f.howToPlant.join(", ") : f.howToPlant || "N/A"}</td>
+                          <td>{Array.isArray(f.category) ? f.category.join(", ") : f.category || "N/A"}</td>
                           <td>
                             <button onClick={() => handleDeleteGardenForm(f.id)} className={styles.deleteBtn}>Delete</button>
                           </td>

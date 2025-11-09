@@ -1,17 +1,17 @@
+
+
+
 import React, { useState, useEffect } from "react";
 import styles from "./Chat.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faPaperPlane, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { auth,db } from "./../../Firebasedata/firebase";
+import { auth, db } from "./../../Firebasedata/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import {
-  collection,
-  addDoc,
-  onSnapshot,
-  query,
-  orderBy,
-  serverTimestamp,
-} from "firebase/firestore";
+import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "firebase/firestore";
+
+import { HfInference } from "@huggingface/inference";
+
+const hf = new HfInference(import.meta.env.VITE_HUGGINGFACE_API_KEY);
 
 function Chat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,6 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
 
-  // Quick options
   const options = [
     "I have a question about plants",
     "I want to submit feedback",
@@ -27,21 +26,11 @@ function Chat() {
   ];
 
   useEffect(() => {
-    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => setUser(currentUser));
 
-    const q = query(
-      collection(db, "chatbotFeedbacks"),
-      orderBy("createdAt", "asc")
-    );
-
+    const q = query(collection(db, "chatbotFeedbacks"), orderBy("createdAt", "asc"));
     const unsubscribeData = onSnapshot(q, (snapshot) => {
-      const feedbacks = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setMessages(feedbacks);
+      setMessages(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     });
 
     return () => {
@@ -52,10 +41,12 @@ function Chat() {
 
   const toggleChat = () => setIsOpen(!isOpen);
 
+  // ✅ New: Send message and generate AI response
   const sendMessage = async (text) => {
     if (!text.trim() || !user) return;
 
-    await addDoc(collection(db, "chatbotFeedbacks"), {
+    // Add user's message
+    const userDoc = await addDoc(collection(db, "chatbotFeedbacks"), {
       text,
       userId: user.uid,
       email: user.email,
@@ -63,11 +54,30 @@ function Chat() {
     });
 
     setMessage("");
+
+    // Generate AI response
+    try {
+      const aiResponse = await hf.textGeneration({
+        model: "tiiuae/falcon-7b-instruct", // free instruction-following model
+        inputs: `You are a plant expert. Answer clearly and helpfully: ${text}`,
+        parameters: { max_new_tokens: 150 },
+      });
+
+      const botText = aiResponse.generated_text;
+
+      // Add AI response to Firestore
+      await addDoc(collection(db, "chatbotFeedbacks"), {
+        text: botText,
+        userId: "bot",
+        email: "EvergreenBot 🌱",
+        createdAt: serverTimestamp(),
+      });
+    } catch (err) {
+      console.error("AI error:", err);
+    }
   };
 
-  const handleOptionClick = (option) => {
-    sendMessage(option);
-  };
+  const handleOptionClick = (option) => sendMessage(option);
 
   return (
     <div className={styles.chatbotContainer}>
@@ -82,11 +92,7 @@ function Chat() {
 
           <div className={styles.options}>
             {options.map((opt, idx) => (
-              <button
-                key={idx}
-                className={styles.optionBtn}
-                onClick={() => handleOptionClick(opt)}
-              >
+              <button key={idx} className={styles.optionBtn} onClick={() => handleOptionClick(opt)}>
                 {opt}
               </button>
             ))}
@@ -96,17 +102,10 @@ function Chat() {
             {messages.map((msg, idx) => {
               const isUserMessage = user?.uid === msg.userId;
               return (
-                <div
-                  key={idx}
-                  className={
-                    isUserMessage ? styles.userMessage : styles.botMessage
-                  }
-                >
+                <div key={idx} className={isUserMessage ? styles.userMessage : styles.botMessage}>
                   {msg.text}
                   <br />
-                  <small style={{ fontSize: "0.7rem", color: "#555" }}>
-                    {msg.email}
-                  </small>
+                  <small style={{ fontSize: "0.7rem", color: "#555" }}>{msg.email}</small>
                 </div>
               );
             })}

@@ -32,6 +32,7 @@ import Contact from "./Homepage/Article/Contact";
 
 import Chat from "./Homepage/Chat/Chat";
 import Articledetails from "./Homepage/Article/Articledetails";
+import Createdemo from "./Forms/createdemo";
 
  
 function App() {
@@ -60,13 +61,15 @@ function App() {
         <Route path="/login" element={<Login />} /> 
         <Route path="/AdminLogin" element={<AdminLogin />} /> 
         
+
         {/*SIGN UP / LOGIN PAGE*/} 
 
         {/* PAYMENT PAGE */}
         <Route path="/Cartpage" element={<CartSidebar />} /> 
+        <Route path="/Createdemo" element={<Createdemo />} /> 
+        
         {/* PAYMENT PAGE */}
  
-        
         {/* Protected Routes: DASHBOARD */}
         <Route
           path="/Dashboard"
@@ -80,9 +83,6 @@ function App() {
          {/* Routed to Plantdetails / Gardendetails page */}
          <Route path="/Gardendetails/:id" element={<Gardendetails />} />
          <Route path="/Plantdetails/:id" element={<Plantdetails />} /> 
-
-      
-
 
          <Route path="/Plantbox" element={<Plantbox />} />
         <Route path="/Gardenbox" element={<Gardenerbox />} />
@@ -109,7 +109,6 @@ function App() {
         <Route path="/Contact" element={<Contact/>} />
 
         <Route path="/Chat" element={<Chat/>} />
-        
         
       </Routes>
        </NetworkWrapper>  

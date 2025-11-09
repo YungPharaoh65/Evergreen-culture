@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Gardenplant.module.css';
-import { Link } from "react-router-dom";  
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../../Firebasedata/firebase';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faSeedling } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
+import styles from "./Gardenplant.module.css";
+import { Link } from "react-router-dom";
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import { db } from "../../../Firebasedata/firebase";
+import { supabase } from "../../../supabaseClient"; // ✅ import Supabase client
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 
 function Gardenerbox() {
@@ -12,32 +13,33 @@ function Gardenerbox() {
   const [filteredGardenForms, setFilteredGardenForms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilter, setActiveFilter] = useState("All");
   const [availableCategories, setAvailableCategories] = useState([]);
+
+  // ✅ Upload states
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [plantName, setPlantName] = useState("");
+  const [plantCategory, setPlantCategory] = useState("");
 
   useEffect(() => {
     const fetchGardenForms = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, 'gardenForms'));
-        const data = querySnapshot.docs.map(doc => ({
+        const querySnapshot = await getDocs(collection(db, "gardenForms"));
+        const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
 
-        console.log("Fetched garden forms:", data);
-
         setGardenForms(data);
         setFilteredGardenForms(data);
 
-        // Flatten all categories and remove duplicates
         const allCategories = data
-          .map(form => form.category) // may be string or array
-          .flatMap(cat => Array.isArray(cat) ? cat : [cat])
+          .map((form) => form.category)
+          .flatMap((cat) => (Array.isArray(cat) ? cat : [cat]))
           .filter(Boolean);
 
-        const uniqueCategories = Array.from(new Set(allCategories));
-        setAvailableCategories(uniqueCategories);
-
+        setAvailableCategories([...new Set(allCategories)]);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching garden forms:", err);
@@ -51,101 +53,120 @@ function Gardenerbox() {
 
   const handleFilterClick = (category) => {
     setActiveFilter(category);
-
-    if (category === 'All') {
+    if (category === "All") {
       setFilteredGardenForms(gardenForms);
-    } else if (category === 'Other') {
-      // Anything that does not match known categories
-      const filtered = gardenForms.filter(form => {
-        const formCats = Array.isArray(form.category) ? form.category : [form.category];
-        return formCats.every(c => !availableCategories.includes(c));
-      });
-      setFilteredGardenForms(filtered);
     } else {
-      const filtered = gardenForms.filter(form => {
-        const formCats = Array.isArray(form.category) ? form.category : [form.category];
+      const filtered = gardenForms.filter((form) => {
+        const formCats = Array.isArray(form.category)
+          ? form.category
+          : [form.category];
         return formCats.includes(category);
       });
       setFilteredGardenForms(filtered);
     }
   };
 
+  // ✅ Upload Image Function
+  const handleImageUpload = async () => {
+    if (!selectedImage || !plantName || !plantCategory) {
+      alert("Please fill in all fields and choose an image.");
+      return;
+    }
+
+    setUploading(true);
+
+    try {
+      const fileName = `${Date.now()}_${selectedImage.name}`;
+      const { data, error: uploadError } = await supabase.storage
+        .from("plantImages")
+        .upload(fileName, selectedImage);
+
+      if (uploadError) throw uploadError;
+
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("plantImages").getPublicUrl(fileName);
+
+      await addDoc(collection(db, "gardenForms"), {
+        name: plantName,
+        category: plantCategory,
+        imageURL: publicUrl,
+        createdAt: new Date(),
+      });
+
+      alert("✅ Plant uploaded successfully!");
+      setPlantName("");
+      setPlantCategory("");
+      setSelectedImage(null);
+    } catch (error) {
+      console.error("Upload error:", error);
+      alert("Failed to upload image. Check your Supabase setup.");
+    } finally {
+      setUploading(false);
+    }
+  };
+
   return (
-    <div className={styles.plantboxWrapper}>
-      
-      {/* Filter Section */}
+      <div>
+<br /><br />
+      {/* ✅ Category Filter */}
       <div className={styles.subtopicsmove}>
         <div
-          key="filter-all"
-          className={`${styles.subheadings} ${activeFilter === 'All' ? styles.active : ''}`}
-          onClick={() => handleFilterClick('All')}
+          className={`${styles.subheadings} ${
+            activeFilter === "All" ? styles.active : ""
+          }`}
+          onClick={() => handleFilterClick("All")}
         >
           All
         </div>
 
         {availableCategories.map((category) => (
           <div
-            key={`category-${category}`} 
-            className={`${styles.subheadings} ${activeFilter === category ? styles.active : ''}`}
+            key={`category-${category}`}
+            className={`${styles.subheadings} ${
+              activeFilter === category ? styles.active : ""
+            }`}
             onClick={() => handleFilterClick(category)}
           >
             {category}
           </div>
         ))}
-
-        {/* "Other" button */}
-        <div
-          key="category-other"
-          className={`${styles.subheadings} ${activeFilter === 'Other' ? styles.active : ''}`}
-          onClick={() => handleFilterClick('Other')}
-        >
-          Other
-        </div>
       </div>
 
-      {/* Loading / Error States */}
+      {/* ✅ Garden Cards */}
       {loading && <p>Loading garden forms...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <br />
-
-      {/* Display Garden Form Cards */}
       <div className={styles.centerbar2}>
-        {filteredGardenForms.length === 0 && !loading && !error && (
-          <p>No garden forms found for this category.</p>
-        )}
         {filteredGardenForms.map((gardenForm) => (
           <Link to={`/Plantdetails/${gardenForm.id}`} key={gardenForm.id}>
             <div className={styles.dashboardContainer2}>
-              
-              {/* Image */}
               <div
                 className={styles.image}
                 style={{
-                  backgroundImage: gardenForm.imageURL
-                    ? `url(${gardenForm.imageURL})`
-                    : 'none',
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
+                  backgroundImage: `url(${gardenForm.imageURL})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
               ></div>
 
-              <br />
-
-              {/* Category & Icon */}
               <div className={styles.subtopicsmove}>
                 <div className={styles.order}>
-                  <FontAwesomeIcon icon={faHeart} color="#f9fffb" className={styles.FontAwesomeIcon} />
+                  <FontAwesomeIcon
+                    icon={faHeart}
+                    color="#f9fffb"
+                    className={styles.FontAwesomeIcon}
+                  />
                 </div>
                 <div className={styles.subtopics}>
-                  {Array.isArray(gardenForm.category) ? gardenForm.category.join(", ") : gardenForm.category || 'Uncategorized'}
+                  {Array.isArray(gardenForm.category)
+                    ? gardenForm.category.join(", ")
+                    : gardenForm.category}
                 </div>
               </div>
 
-              {/* Name & Info */}
-              <div className={styles.header}>{gardenForm.name || 'No Name'}</div>
-              <a href="#">Did you know</a>
-              <div className={styles.price}></div>
+              <div className={styles.header}>{gardenForm.name}</div>
+              <a href="#">Did you know?</a>
             </div>
           </Link>
         ))}
@@ -155,4 +176,3 @@ function Gardenerbox() {
 }
 
 export default Gardenerbox;
-
